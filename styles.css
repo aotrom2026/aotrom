@@ -252,7 +252,7 @@ a:focus-visible {
 
 @media (max-width: 700px) {
   .hero { min-height: 100svh; }
-  .hero__image { object-position: center center; filter: grayscale(1) contrast(1.02); }
+  .hero__image { object-position: center center; filter: none; }
   .hero__veil { background: linear-gradient(180deg, rgba(0,0,0,.5), rgba(0,0,0,.08) 42%, rgba(0,0,0,.64)); }
   .hero__nav { font-size: clamp(25px, 8vw, 35px); line-height: 1.01; }
   .mark { width: 102px; }
