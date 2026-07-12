@@ -173,8 +173,9 @@ a:focus-visible {
 .polaroid img {
   display: block;
   width: 100%;
-  height: auto;
+  aspect-ratio: 3 / 4;
   object-fit: contain;
+  background: #d6d6d2;
   filter: grayscale(1) contrast(1.06);
 }
 
@@ -267,7 +268,7 @@ a:focus-visible {
   .release__title { font-size: clamp(34px, 10.4vw, 52px); }
   .people-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 14px; }
   .person-card:nth-child(2) .polaroid { margin-top: 32px; }
-  .person-card:nth-child(3) .polaroid { grid-column: 1 / -1; width: calc(50% - 7px); margin-right: auto; margin-left: auto; }
+  .polaroid figcaption strong { font-size: clamp(16px, 4.7vw, 21px); }
   .gallery { grid-template-columns: 1fr 1fr; }
   .gallery__image--tall { height: 128vw; }
   .character-hero__image { object-position: center top; }

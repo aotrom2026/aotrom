@@ -37,8 +37,9 @@ assert.doesNotMatch(`${home}${character}${alya}${viktoriya}${nablyudateli}`, /п
 assert.doesNotMatch(`${character}${alya}${viktoriya}${nablyudateli}`, /logo-(main|small)\.png/);
 assert.match(`${character}${alya}${viktoriya}${nablyudateli}`, /\.\.\/assets\/aotrom-logo\.png/);
 assert.match(styles, /filter:\s*grayscale\(1\)/);
-assert.match(styles, /\.polaroid img \{[\s\S]*?height: auto;[\s\S]*?object-fit: contain;/);
-assert.doesNotMatch(styles, /\.polaroid img \{[\s\S]*?aspect-ratio:/);
+assert.match(styles, /\.polaroid img \{[\s\S]*?aspect-ratio: 3 \/ 4;[\s\S]*?object-fit: contain;/);
+assert.doesNotMatch(styles, /\.person-card:nth-child\(3\) \.polaroid \{ grid-column:/);
+assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.polaroid figcaption strong \{ font-size: clamp\(16px, 4\.7vw, 21px\); \}/);
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.hero__image \{ object-position: center center; filter: none; \}/);
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.contact__content \{ gap: 24px; \}/);
 console.log('character page contract passes');
