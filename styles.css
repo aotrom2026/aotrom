@@ -173,8 +173,8 @@ a:focus-visible {
 .polaroid img {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   filter: grayscale(1) contrast(1.06);
 }
 
