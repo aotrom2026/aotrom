@@ -2,6 +2,7 @@ const characters = [
   { number: '01', title: 'каузация', image: 'assets/characters/kauzatsiya.jpg', href: 'kauzatsiya/' },
   { number: '02', title: 'ALYA', image: 'assets/characters/alya.jpg', href: 'alya/' },
   { number: '03', title: 'Виктория Соломахина', image: 'assets/characters/viktoriya-solomakhina.jpg', href: 'viktoriya-solomakhina/' },
+  { number: '04', title: 'Наблюдатели', image: 'assets/characters/nablyudateli.jpg', href: 'nablyudateli/' },
 ];
 
 const releaseList = document.querySelector('#release-list');
