@@ -30,4 +30,5 @@ assert.doesNotMatch(`${home}${character}${alya}${viktoriya}`, /AOTROOM|aotroom/)
 assert.doesNotMatch(`${home}${character}${alya}${viktoriya}`, /персонаж/);
 assert.match(styles, /filter:\s*grayscale\(1\)/);
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.hero__image \{ object-position: center center; filter: none; \}/);
+assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.contact__content \{ gap: 24px; \}/);
 console.log('character page contract passes');

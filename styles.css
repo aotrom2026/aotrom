@@ -258,6 +258,7 @@ a:focus-visible {
   .mark { width: 102px; }
   .hero__bottom { font-size: 13px; }
   .about, .contact { grid-template-columns: 1fr; min-height: auto; }
+  .contact__content { gap: 24px; }
   .about__note { justify-self: start; }
   .section__heading { display: grid; }
   .release { grid-template-columns: 30px minmax(0, 1fr) 47px; gap: 8px; min-height: 105px; }
