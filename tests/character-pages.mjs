@@ -21,5 +21,6 @@ assert.match(alya, /ALYA/);
 assert.match(alya, /\.\.\/assets\/characters\/alya\.jpg/);
 assert.match(viktoriya, /Виктория Соломахина/);
 assert.match(viktoriya, /\.\.\/assets\/characters\/viktoriya-solomakhina\.jpg/);
+assert.doesNotMatch(`${home}${character}${alya}${viktoriya}`, /AOTROOM|aotroom/);
 assert.match(styles, /filter:\s*grayscale\(1\)/);
 console.log('character page contract passes');
