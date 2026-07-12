@@ -13,6 +13,7 @@ assert.match(html, /assets\/logo-main\.png/);
 assert.match(html, /assets\/logo-small\.png/);
 assert.match(html, /class=["']mark["'][^>]*>\s*<img src=["']assets\/logo-small\.png["']/);
 assert.match(html, /class=["']about__logo["'] src=["']assets\/logo-main\.png["']/);
+assert.match(html, /class=["']footer__logo["'] src=["']assets\/logo-small\.png["']/);
 assert.doesNotMatch(html, />aot<br>room</);
 assert.doesNotMatch(html, /<h1>aotroom<\/h1>/);
 assert.doesNotMatch(html, /assets\/gallery\/img-0528\.jpg/);
