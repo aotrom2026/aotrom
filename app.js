@@ -1,16 +1,18 @@
 const characters = [
-  { number: '01', title: 'каузация', label: 'персонаж', action: 'войти', href: 'kauzatsiya/' },
-  { number: '02', title: 'ALYA', label: 'персонаж', action: 'войти', href: 'alya/' },
-  { number: '03', title: 'Виктория Соломахина', label: 'персонаж', action: 'войти', href: 'viktoriya-solomakhina/' },
+  { number: '01', title: 'каузация', image: 'assets/characters/kauzatsiya.jpg', href: 'kauzatsiya/' },
+  { number: '02', title: 'ALYA', image: 'assets/characters/alya.jpg', href: 'alya/' },
+  { number: '03', title: 'Виктория Соломахина', image: 'assets/characters/viktoriya-solomakhina.jpg', href: 'viktoriya-solomakhina/' },
 ];
 
 const releaseList = document.querySelector('#release-list');
 
-releaseList.innerHTML = characters.map(({ number, title, label, action, href }) => `
-  <article class="release">
-    <span class="release__number">${number}</span>
-    <h3 class="release__title">${title}</h3>
-    <span class="release__year">${label}</span>
-    <a class="release__status" href="${href}">${action} <span aria-hidden="true">↗</span></a>
-  </article>
+releaseList.className = 'people-grid';
+
+releaseList.innerHTML = characters.map(({ number, title, image, href }) => `
+  <a class="person-card" href="${href}" aria-label="${title}">
+    <figure class="polaroid">
+      <img src="${image}" alt="${title}" loading="lazy">
+      <figcaption><span>${number}</span><strong>${title}</strong></figcaption>
+    </figure>
+  </a>
 `).join('');

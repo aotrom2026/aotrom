@@ -9,12 +9,17 @@ const styles = await readFile(new URL('../styles.css', import.meta.url), 'utf8')
 const app = await readFile(new URL('../app.js', import.meta.url), 'utf8');
 
 assert.match(home, /id=["']release-list["']/);
+assert.match(home, /<h2 id=["']releases-title["']>артисты<\/h2>/);
 assert.match(app, /href:\s*'kauzatsiya\/'/);
 assert.match(app, /title:\s*'каузация'/);
+assert.match(app, /image:\s*'assets\/characters\/kauzatsiya\.jpg'/);
 assert.match(app, /href:\s*'alya\/'/);
 assert.match(app, /title:\s*'ALYA'/);
+assert.match(app, /image:\s*'assets\/characters\/alya\.jpg'/);
 assert.match(app, /href:\s*'viktoriya-solomakhina\/'/);
 assert.match(app, /title:\s*'Виктория Соломахина'/);
+assert.match(app, /image:\s*'assets\/characters\/viktoriya-solomakhina\.jpg'/);
+assert.match(app, /class="person-card"/);
 assert.match(character, /каузация/);
 assert.match(character, /\.\.\/assets\/characters\/kauzatsiya\.jpg/);
 assert.match(alya, /ALYA/);
@@ -22,5 +27,6 @@ assert.match(alya, /\.\.\/assets\/characters\/alya\.jpg/);
 assert.match(viktoriya, /Виктория Соломахина/);
 assert.match(viktoriya, /\.\.\/assets\/characters\/viktoriya-solomakhina\.jpg/);
 assert.doesNotMatch(`${home}${character}${alya}${viktoriya}`, /AOTROOM|aotroom/);
+assert.doesNotMatch(`${home}${character}${alya}${viktoriya}`, /персонаж/);
 assert.match(styles, /filter:\s*grayscale\(1\)/);
 console.log('character page contract passes');
