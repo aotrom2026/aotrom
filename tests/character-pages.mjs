@@ -34,6 +34,8 @@ assert.match(nablyudateli, /Наблюдатели/);
 assert.match(nablyudateli, /\.\.\/assets\/characters\/nablyudateli\.jpg/);
 assert.doesNotMatch(`${home}${character}${alya}${viktoriya}${nablyudateli}`, /AOTROOM|aotroom/);
 assert.doesNotMatch(`${home}${character}${alya}${viktoriya}${nablyudateli}`, /персонаж/);
+assert.doesNotMatch(`${character}${alya}${viktoriya}${nablyudateli}`, /logo-(main|small)\.png/);
+assert.match(`${character}${alya}${viktoriya}${nablyudateli}`, /\.\.\/assets\/aotrom-logo\.png/);
 assert.match(styles, /filter:\s*grayscale\(1\)/);
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.hero__image \{ object-position: center center; filter: none; \}/);
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.contact__content \{ gap: 24px; \}/);

@@ -9,11 +9,10 @@ for (const id of ['hero', 'about', 'releases', 'contact']) {
 
 assert.match(html, /assets\/hero-mobile\.jpg/);
 assert.match(html, /assets\/hero-desktop\.jpg/);
-assert.match(html, /assets\/logo-main\.png/);
-assert.match(html, /assets\/logo-small\.png/);
-assert.match(html, /class=["']mark["'][^>]*>\s*<img src=["']assets\/logo-small\.png["']/);
-assert.match(html, /class=["']about__logo["'] src=["']assets\/logo-main\.png["']/);
-assert.match(html, /class=["']footer__logo["'] src=["']assets\/logo-small\.png["']/);
+assert.match(html, /class=["']mark["'][^>]*>\s*<img src=["']assets\/aotrom-logo\.png["']/);
+assert.match(html, /class=["']about__logo["'] src=["']assets\/aotrom-logo\.png["']/);
+assert.match(html, /class=["']footer__logo["'] src=["']assets\/aotrom-logo\.png["']/);
+assert.doesNotMatch(html, /assets\/logo-(main|small)\.png/);
 assert.doesNotMatch(html, />aot<br>room</);
 assert.doesNotMatch(html, /<h1>aotroom<\/h1>/);
 assert.doesNotMatch(html, /assets\/gallery\/img-0528\.jpg/);
