@@ -10,6 +10,16 @@
 
 ---
 
+## Approved revision — individual work pages only
+
+This revision supersedes the original shared `#portfolio` section: the home page contains only reference-style artist/project rows, and every row opens a dedicated page with only that artist or project's links. The row list includes 11 entries: каузация, ALYA, Виктория Соломахина, Наблюдатели, aotrom, LAREN, Владимир Широков, ALTRO CORO, Остальные проекты, Голос and Браво Бис. Short URLs must use researched track/performance names, never `релиз 01` or `видео 01`.
+
+The shared data module remains the single source of truth. `app.js` renders only `artist-row` entries. `work-page.js` renders one group's named links within each detail page; image-bearing entries use their photos/artwork whole and inside a bounded media card, while entries without supplied imagery are typographic-only pages.
+
+The final page set is `kauzatsiya/`, `alya/`, `viktoriya-solomakhina/`, `nablyudateli/`, `aotrom/`, `laren/`, `vladimir-shirokov/`, `altro-coro/`, `other-projects/`, `golos/`, and `bravo-bis/`. The original Task 2 portfolio-index output is removed. The original Task 3 six-page scope expands to these 11 pages.
+
+---
+
 ### Task 1: Add the portfolio inventory and its contract
 
 **Files:**
