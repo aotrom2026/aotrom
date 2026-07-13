@@ -33,7 +33,7 @@ assert.doesNotMatch(`${home}${character}${alya}${viktoriya}${nablyudateli}${aotr
 const workPage = await readFile(new URL('../work-page.js', import.meta.url), 'utf8').catch(() => '');
 assert.match(workPage, /work-page__media/);
 assert.match(styles, /\.work-page__media img \{[\s\S]*?object-fit: contain;/);
-for (const label of ['Виктория Соломахина', 'каузация', 'ALYA', 'aotrom', 'LAREN', 'Владимир Широков', 'Наблюдатели', 'ALTRO CORO', 'Голос', 'Браво Бис', 'Музыка внутри', 'Ты не верь слезам']) {
+for (const label of ['Виктория Соломахина', 'каузация', 'ALYA', 'aotrom', 'LAREN', 'Владимир Широков', 'Наблюдатели', 'ALTRO CORO', 'Голос', 'Браво Бис', 'Музыка внутри', 'Ты не верь слезам', 'Проснись со мной', 'Мой городок']) {
   assert.match(portfolioData, new RegExp(label));
 }
 assert.match(portfolioData, /https:\/\/band\.link\/__polushko/);

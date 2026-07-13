@@ -21,9 +21,9 @@ export const portfolioGroups = [
       link('Полюшко', 'https://band.link/__polushko'),
       link('Русалочка', 'https://bnd.lc/rusalochkaa'),
       link('Унеси', 'https://vikso.band.link/_unesi'),
-      link('Проснись', 'https://band.link/prosnissomnoy'),
+      link('Проснись со мной', 'https://band.link/prosnissomnoy'),
       link('Прощай', 'https://band.link/proshay'),
-      link('Городок', 'https://band.link/moygorodok'),
+      link('Мой городок', 'https://band.link/moygorodok'),
     ],
   },
   {
@@ -82,7 +82,7 @@ export const portfolioGroups = [
   {
     key: 'altro-coro', title: 'ALTRO CORO', kind: 'музыка',
     links: [
-      link('Городок', 'https://band.link/moygorodok'),
+      link('Мой городок', 'https://band.link/moygorodok'),
       link('Друг', 'https://band.link/_dryg'),
     ],
   },
