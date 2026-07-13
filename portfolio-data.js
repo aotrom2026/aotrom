@@ -4,7 +4,7 @@ export const entries = [
   { key: 'viktoriya-solomakhina', number: '03', title: 'Виктория Соломахина', type: 'артист', category: 'music', href: 'viktoriya-solomakhina/', image: 'assets/characters/viktoriya-solomakhina.jpg', monochrome: true },
   { key: 'nablyudateli', number: '04', title: 'Наблюдатели', type: 'артист', category: 'music', href: 'nablyudateli/', image: 'assets/characters/nablyudateli.jpg', monochrome: true },
   { key: 'aotrom', number: '05', title: 'aotrom', type: 'артист', category: 'music', href: 'aotrom/', image: 'assets/characters/aotrom.jpg', monochrome: true },
-  { key: 'laren', number: '06', title: 'LAREN', type: 'артист', category: 'music', href: 'laren/', image: 'assets/characters/laren.jpg', monochrome: false },
+  { key: 'laren', number: '06', title: 'LAREN', type: 'артист', category: 'music', href: 'laren/', image: 'assets/characters/laren.jpg', monochrome: true },
   { key: 'vladimir-shirokov', number: '07', title: 'Владимир Широков', type: 'артист', category: 'music', href: 'vladimir-shirokov/', image: null, monochrome: false },
   { key: 'altro-coro', number: '08', title: 'ALTRO CORO', type: 'артист', category: 'music', href: 'altro-coro/', image: null, monochrome: false },
   { key: 'other-projects', number: '09', title: 'Остальные проекты', type: 'проект', category: 'music', href: 'other-projects/', image: null, monochrome: false },

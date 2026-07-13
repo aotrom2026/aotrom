@@ -55,7 +55,7 @@ for (const [title, url] of [
 assert.ok(portfolioData.indexOf("link('От меня до тебя'") < portfolioData.indexOf("link('Объясни'"));
 assert.match(portfolioData, /link\('От меня до тебя',[\s\S]*?label: 'album'/);
 assert.match(portfolioData, /key: 'aotrom'[\s\S]*?image: 'assets\/characters\/aotrom\.jpg'/);
-assert.match(portfolioData, /key: 'laren'[\s\S]*?image: 'assets\/characters\/laren\.jpg'/);
+assert.match(portfolioData, /key: 'laren'[\s\S]*?image: 'assets\/characters\/laren\.jpg'[\s\S]*?monochrome: true/);
 assert.doesNotMatch(portfolioData, /релиз \d+|видео \d+/);
 assert.match(portfolioData, /category: 'tv'/);
 assert.match(styles, /filter:\s*grayscale\(1\)/);

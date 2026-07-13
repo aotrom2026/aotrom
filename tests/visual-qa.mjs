@@ -55,7 +55,7 @@ for (const viewport of [
   assert.equal(/[↗←↓]/.test(homeMetrics.bodyText), false, `${viewport.name}: literal arrow glyph is visible`);
   assert.ok(homeMetrics.scrollWidth <= homeMetrics.viewportWidth, `${viewport.name}: home page overflows horizontally`);
   assert.deepEqual(homeMetrics.brokenImages, [], `${viewport.name}: local home images failed to load`);
-  assert.equal(await page.locator('.editorial__image').count(), 8, `${viewport.name}: editorial playlist image count`);
+  assert.equal(await page.locator('.editorial__image').count(), 10, `${viewport.name}: editorial playlist image count`);
   assert.equal(await page.locator('.gallery__image img').count(), 3, `${viewport.name}: author gallery image count`);
   await page.locator('#video').scrollIntoViewIfNeeded();
   await page.locator('#video').screenshot({ path: `${outputDir}/video-${viewport.name}.png` });
