@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/page-contract.mjs && node tests/character-pages.mjs",
+    "test": "node tests/page-contract.mjs && node tests/character-pages.mjs && node tests/inquiry-form.mjs",
     "start": "python3 -m http.server 4173 --directory ."
   }
 }

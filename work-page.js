@@ -40,13 +40,16 @@ root.innerHTML = `
         <h2 id="work-page-works-title">${group.kind}</h2>
       </div>
       <ol class="work-page__links">
-        ${group.links.map(({ title, url, label }, index) => `
+        ${group.links.map(({ title, url, label, action: linkAction, secondaryTitle, secondaryUrl }, index) => `
           <li>
             <span>${String(index + 1).padStart(2, '0')}</span>
-            <a href="${url}" target="_blank" rel="noreferrer">
-              <span class="work-page__release-name">${title}${label ? renderLabel(label) : ''}</span>
-              <em>${action}<span class="external-icon" aria-hidden="true"></span></em>
-            </a>
+            <div class="work-page__link-row">
+              <a href="${url}" target="_blank" rel="noreferrer">
+                <span class="work-page__release-name">${title}${label ? renderLabel(label) : ''}</span>
+                <em>${linkAction || action}<span class="external-icon" aria-hidden="true"></span></em>
+              </a>
+              ${secondaryUrl ? `<a class="work-page__secondary-link" href="${secondaryUrl}" target="_blank" rel="noreferrer">${secondaryTitle || 'слушать'}<span class="external-icon" aria-hidden="true"></span></a>` : ''}
+            </div>
           </li>
         `).join('')}
       </ol>

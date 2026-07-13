@@ -24,7 +24,7 @@ export const portfolioGroups = [
       link('Проснись со мной', 'https://band.link/prosnissomnoy'),
       link('С тобой', 'https://music.yandex.ru/album/39719271/track/146161341?ref_id=C79E5907-EECB-4A57-A109-E00C8F2421CE&utm_medium=copy_link'),
       link('Прощай', 'https://band.link/proshay'),
-      link('Мой городок', 'https://band.link/moygorodok'),
+      link('Городок', 'https://band.link/moygorodok'),
     ],
   },
   {
@@ -100,6 +100,11 @@ export const portfolioGroups = [
       link('Red', 'https://onerpm.link/902558270024?fbclid=PAAaaL8po36c9IoUv8oKC7uqG4Z_ISgOUNExysskmrLGhZ9Nb-qMdJip3TiKo_aem_AZH4Vq1xjNXrq4dsc3luA3Uz9z7mroiXfwwEeHjqD5q-DMxAB8hdz7voULFoW5mlJv0'),
       link('Что делать', 'https://band.link/U6sIy'),
       link('Лотерея', 'http://allstarmusic.link/vita_lotereya'),
+      link('Чёрный ворон', 'https://vkvideo.ru/video-41774259_456245737?t=2s', {
+        action: 'смотреть',
+        secondaryTitle: 'слушать',
+        secondaryUrl: 'https://music.yandex.ru/album/32393365/track/128879744?ref_id=BE754CEE-098E-4F4D-AE15-CEBC8476AB26&utm_medium=copy_link',
+      }),
     ],
   },
   {
@@ -109,9 +114,9 @@ export const portfolioGroups = [
       link('Виктория Соломахина — Выше', 'https://www.1tv.ru/shows/golos-11/vystupleniya/viktoriya-solomahina-vyshe-golos-11-chetvertfinal-fragment-vypuska-ot-19-05-2023'),
       link('Мария Мирова — Только', 'https://www.1tv.ru/-/sesqmi'),
       link('Елизавета Качурак — Я тебя рисую', 'https://www.1tv.ru/-/lrzwdr'),
-      link('Голос 12 — Поединки, 15.03.2024', 'https://www.1tv.ru/-/dxceoo'),
-      link('Голос 12 — Поединки, 22.03.2024', 'https://www.1tv.ru/-/tercbf'),
-      link('Алина — Больно', 'https://www.1tv.ru/shows/golos-12/vypuski/chetvertfinal-golos-12-vypusk-ot-12-04-2024'),
+      link('«You Raise Me Up» — Фахриддин Хакимов и Софья Льорет', 'https://www.1tv.ru/-/dxceoo'),
+      link('«Ах ты, степь широкая» — Евгений Курчич, Александр Власенков', 'https://www.1tv.ru/-/tercbf'),
+      link('Алина Калашникова — Больно', 'https://www.1tv.ru/shows/golos-12/vypuski/chetvertfinal-golos-12-vypusk-ot-12-04-2024'),
       link('Владимир Гринченко и Алон Низамов — Свободна', 'https://1tv.ru/-/mbqbkf'),
       link('Валерия Асонова и Юрий Курнаков — Если ты когда-нибудь меня простишь', 'https://1tv.ru/-/cvbljs'),
       link('Валентина Яньшина — Метелица', 'https://www.1tv.ru/shows/golos-13/vystupleniya/valentina-yanshina-metelica-nokauty-golos-vypusk-ot-04-04-2025'),

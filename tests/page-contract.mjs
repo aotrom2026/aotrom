@@ -3,6 +3,13 @@ import { readFile } from 'node:fs/promises';
 
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const app = await readFile(new URL('../app.js', import.meta.url), 'utf8');
+const styles = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+const privacy = await readFile(new URL('../privacy/index.html', import.meta.url), 'utf8').catch(() => '');
+const consent = await readFile(new URL('../consent/index.html', import.meta.url), 'utf8').catch(() => '');
+const robots = await readFile(new URL('../robots.txt', import.meta.url), 'utf8').catch(() => '');
+const sitemap = await readFile(new URL('../sitemap.xml', import.meta.url), 'utf8').catch(() => '');
+const clientChecklist = await readFile(new URL('../CLIENT-CHECKLIST.md', import.meta.url), 'utf8').catch(() => '');
+const telegramBotSetup = await readFile(new URL('../TELEGRAM-BOT-SETUP.md', import.meta.url), 'utf8').catch(() => '');
 
 for (const id of ['hero', 'about', 'releases', 'contact']) {
   assert.match(html, new RegExp(`id=["']${id}["']`));
@@ -19,10 +26,10 @@ assert.doesNotMatch(html, /<h1>aotroom<\/h1>/);
 assert.doesNotMatch(html, /assets\/gallery\/img-0528\.jpg/);
 assert.match(html, />все<\/a>/);
 assert.doesNotMatch(html, />всё<\/a>/);
-assert.match(html, /<title>aotrom — музыка автора<\/title>/);
-assert.match(html, /property=["']og:title["'] content=["']aotrom["']/);
-assert.match(html, /property=["']og:description["'] content=["']саунд-продюсер, композитор, аранжировщик["']/);
-assert.match(html, /name=["']twitter:card["'] content=["']summary["']/);
+assert.match(html, /<title>Андрей Кислов — саунд-продюсер и композитор<\/title>/);
+assert.match(html, /property=["']og:title["'] content=["']Андрей Кислов — саунд-продюсер и композитор["']/);
+assert.match(html, /property=["']og:description["'] content=["']Песня под ключ, аранжировка/);
+assert.match(html, /name=["']twitter:card["'] content=["']summary_large_image["']/);
 assert.match(html, /<source media=["']\(max-width: 700px\)["'] srcset=["']assets\/hero-mobile\.jpg["']/);
 assert.doesNotMatch(html, /telegram-peer-photo-size|telegram-cloud-photo-size/);
 assert.doesNotMatch(html, /id=["']portfolio["']/);
@@ -43,6 +50,19 @@ assert.match(html, /mosfilm\.ru\/about\/news\/v-1-y-muzykalnoy-studii-mosfilma/)
 assert.match(html, /instagram\.com\/aotr0m/);
 assert.match(html, /t\.me\/aotrom0/);
 assert.match(html, /tel:\+79995415143/);
+assert.match(html, /id=["']inquiry["']/);
+assert.match(html, /id=["']inquiry-form["']/);
+assert.match(html, /name=["']services["']/);
+for (const service of ['песня под ключ', 'аранжировка', 'сведение', 'мастеринг', 'запись вокала', 'сведение вокала', 'тюн вокала', 'сведение подкастов', 'саунд-дизайн (GSN audio)']) {
+  assert.ok(html.includes(service), `missing inquiry service: ${service}`);
+}
+assert.match(html, /name=["']telegram["']/);
+assert.match(html, /name=["']personal-data-consent["']/);
+assert.match(html, /href=["']consent\/["']/);
+assert.match(html, /href=["']privacy\/["']/);
+assert.match(html, /src=["']inquiry-form\.js["']/);
+assert.match(styles, /\.inquiry__grid/);
+assert.match(styles, /\.service-option/);
 assert.match(html, /Более 7 лет профессионально занимаюсь созданием музыки/);
 assert.match(html, /Работаю с музыкальными проектами от идеи до финального релиза/);
 assert.match(html, /Музыкальный продакшн для артистов, творческих коллективов и коммерческих проектов/);
@@ -63,4 +83,25 @@ assert.match(app, /class="artist-row__type"/);
 assert.match(app, /external-icon/);
 assert.doesNotMatch(app, /[↗←↓]/);
 assert.doesNotMatch(app, /class="portfolio-group"/);
+assert.match(html, /rel=["']canonical["'] href=["']https:\/\/aotrom\.art\/["']/);
+assert.match(html, /property=["']og:image["'] content=["']https:\/\/aotrom\.art\/assets\/hero-desktop\.jpg["']/);
+assert.match(html, /type=["']application\/ld\+json["']/);
+assert.match(html, /"@type":\s*"Person"/);
+assert.match(html, /"@type":\s*"WebSite"/);
+assert.match(html, /"itemOffered":\s*\{\s*"@type":\s*"Service"/);
+assert.match(robots, /Sitemap: https:\/\/aotrom\.art\/sitemap\.xml/);
+for (const path of ['', 'kauzatsiya/', 'viktoriya-solomakhina/', 'other-projects/', 'privacy/', 'consent/']) {
+  assert.match(sitemap, new RegExp(`<loc>https://aotrom\\.art/${path.replace('/', '\\/')}</loc>`));
+}
+assert.match(privacy, /Политика обработки персональных данных/);
+assert.match(privacy, /Андрей Кислов/);
+assert.match(privacy, /не сохраняет введённые в форму данные/);
+assert.match(consent, /Согласие на обработку персональных данных/);
+assert.match(consent, /сообщения в Telegram/);
+assert.match(clientChecklist, /полное ФИО/);
+assert.match(clientChecklist, /Роскомнадзор/);
+assert.match(telegramBotSetup, /@BotFather/);
+assert.match(telegramBotSetup, /\/newbot/);
+assert.match(telegramBotSetup, /BOT_TOKEN/);
+assert.match(telegramBotSetup, /нельзя.*код сайта/i);
 console.log('page contract passes');

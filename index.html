@@ -4,18 +4,64 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#111111">
-    <meta name="description" content="саунд-продюсер, композитор, аранжировщик">
+    <meta name="description" content="Музыкальный продакшн Андрея Кислова: песня под ключ, аранжировка, запись вокала, сведение и мастеринг. Портфолио и заявка в Telegram.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ru_RU">
     <meta property="og:url" content="https://aotrom.art/">
     <meta property="og:site_name" content="aotrom">
-    <meta property="og:title" content="aotrom">
-    <meta property="og:description" content="саунд-продюсер, композитор, аранжировщик">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="aotrom">
-    <meta name="twitter:description" content="саунд-продюсер, композитор, аранжировщик">
-    <title>aotrom — музыка автора</title>
+    <meta property="og:title" content="Андрей Кислов — саунд-продюсер и композитор">
+    <meta property="og:description" content="Песня под ключ, аранжировка, запись вокала, сведение и мастеринг. Работы для артистов, телевидения и коммерческих проектов.">
+    <meta property="og:image" content="https://aotrom.art/assets/hero-desktop.jpg">
+    <meta property="og:image:alt" content="Чёрно-белый портрет саунд-продюсера Андрея Кислова">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Андрей Кислов — саунд-продюсер и композитор">
+    <meta name="twitter:description" content="Песня под ключ, аранжировка, запись вокала, сведение и мастеринг.">
+    <meta name="twitter:image" content="https://aotrom.art/assets/hero-desktop.jpg">
+    <title>Андрей Кислов — саунд-продюсер и композитор</title>
+    <link rel="canonical" href="https://aotrom.art/">
     <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://aotrom.art/#person",
+            "name": "Андрей Кислов",
+            "alternateName": "aotrom",
+            "url": "https://aotrom.art/",
+            "image": "https://aotrom.art/assets/author/andrey-profile.jpg",
+            "jobTitle": "Саунд-продюсер, композитор, аранжировщик",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Москва",
+              "addressCountry": "RU"
+            },
+            "sameAs": [
+              "https://instagram.com/aotr0m",
+              "https://t.me/aotrom0",
+              "https://www.youtube.com/watch?v=P0LLevJQ9oM"
+            ],
+            "makesOffer": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Песня под ключ" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Аранжировка" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Сведение и мастеринг" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Запись и продакшн вокала" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Саунд-дизайн" } }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://aotrom.art/#website",
+            "url": "https://aotrom.art/",
+            "name": "aotrom — Андрей Кислов",
+            "inLanguage": "ru-RU",
+            "publisher": { "@id": "https://aotrom.art/#person" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <main>
@@ -32,6 +78,7 @@
         <nav class="hero__nav" aria-label="Основная навигация">
           <a href="#about">кто я</a>
           <a href="#releases">работы</a>
+          <a href="#inquiry">заявка</a>
           <a href="#contact">связь</a>
           <a href="#all">все</a>
         </nav>
@@ -148,8 +195,55 @@
         </figure>
       </section>
 
+      <section id="inquiry" class="inquiry section" aria-labelledby="inquiry-title">
+        <div class="inquiry__heading">
+          <p class="section__kicker">05 / обсудить проект</p>
+          <div>
+            <h2 id="inquiry-title">расскажите,<br>что нужно</h2>
+            <p>Выберите направления и оставьте свой ник. Откроется Telegram с готовым сообщением — останется только отправить.</p>
+          </div>
+        </div>
+        <form id="inquiry-form" class="inquiry__form" novalidate>
+          <div class="inquiry__grid">
+            <fieldset class="inquiry__services" aria-describedby="services-error">
+              <legend>01 / услуги</legend>
+              <div class="service-options">
+                <label class="service-option"><input type="checkbox" name="services" value="песня под ключ"><span>песня под ключ</span></label>
+                <label class="service-option"><input type="checkbox" name="services" value="аранжировка"><span>аранжировка</span></label>
+                <label class="service-option"><input type="checkbox" name="services" value="сведение"><span>сведение</span></label>
+                <label class="service-option"><input type="checkbox" name="services" value="мастеринг"><span>мастеринг</span></label>
+                <label class="service-option"><input type="checkbox" name="services" value="запись вокала"><span>запись вокала</span></label>
+                <label class="service-option"><input type="checkbox" name="services" value="сведение вокала"><span>сведение вокала</span></label>
+                <label class="service-option"><input type="checkbox" name="services" value="тюн вокала"><span>тюн вокала</span></label>
+                <label class="service-option"><input type="checkbox" name="services" value="сведение подкастов"><span>сведение подкастов</span></label>
+                <label class="service-option"><input type="checkbox" name="services" value="саунд-дизайн (GSN audio)"><span>саунд-дизайн <small>GSN audio</small></span></label>
+              </div>
+              <p id="services-error" class="form-error" aria-live="polite"></p>
+            </fieldset>
+
+            <div class="inquiry__identity">
+              <label class="inquiry__field" for="telegram-handle">
+                <span>02 / ваш ник в Telegram</span>
+                <input id="telegram-handle" name="telegram" type="text" inputmode="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@username" aria-describedby="telegram-hint telegram-error" required>
+              </label>
+              <p id="telegram-hint" class="form-hint">Только латинские буквы, цифры и подчёркивание.</p>
+              <p id="telegram-error" class="form-error" aria-live="polite"></p>
+
+              <label class="consent-option">
+                <input type="checkbox" name="personal-data-consent" required>
+                <span>Я даю <a href="consent/" target="_blank">согласие на обработку персональных данных</a> и ознакомлен(а) с <a href="privacy/" target="_blank">политикой конфиденциальности</a>.</span>
+              </label>
+              <p id="consent-error" class="form-error" aria-live="polite"></p>
+
+              <button class="inquiry__submit" type="submit">открыть Telegram <span class="external-icon" aria-hidden="true"></span></button>
+              <p id="inquiry-status" class="inquiry__status" role="status" aria-live="polite">Сайт не сохраняет введённые данные. Вы сами отправите сообщение в Telegram.</p>
+            </div>
+          </div>
+        </form>
+      </section>
+
       <section id="contact" class="contact section">
-        <p class="section__kicker">05 / связь</p>
+        <p class="section__kicker">06 / связь</p>
         <div class="contact__content">
           <h2>будь на связи</h2>
           <div class="contact__links">
@@ -163,9 +257,14 @@
 
     <footer class="footer">
       <img class="footer__logo" src="assets/aotrom-logo.png" alt="aotrom">
+      <div class="footer__legal">
+        <a href="privacy/">политика конфиденциальности</a>
+        <a href="consent/">согласие на обработку данных</a>
+      </div>
       <span>2026</span>
     </footer>
 
     <script type="module" src="app.js"></script>
+    <script type="module" src="inquiry-form.js"></script>
   </body>
 </html>

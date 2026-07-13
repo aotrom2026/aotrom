@@ -57,6 +57,38 @@ for (const viewport of [
   assert.deepEqual(homeMetrics.brokenImages, [], `${viewport.name}: local home images failed to load`);
   assert.equal(await page.locator('.editorial__image').count(), 10, `${viewport.name}: editorial playlist image count`);
   assert.equal(await page.locator('.gallery__image img').count(), 3, `${viewport.name}: author gallery image count`);
+
+  await page.locator('#inquiry').scrollIntoViewIfNeeded();
+  const inquiryColumns = await page.locator('.inquiry__grid').evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').length);
+  assert.equal(inquiryColumns, viewport.name === 'mobile' ? 1 : 2, `${viewport.name}: inquiry column layout`);
+  await page.locator('.inquiry__submit').click();
+  assert.match(await page.locator('#services-error').innerText(), /Выберите хотя бы одну услугу/);
+  assert.match(await page.locator('#telegram-error').innerText(), /Укажите корректный ник/);
+  assert.match(await page.locator('#consent-error').innerText(), /Подтвердите согласие/);
+  await page.locator('label.service-option').filter({ hasText: 'песня под ключ' }).click();
+  await page.locator('label.service-option').filter({ hasText: 'сведение вокала' }).click();
+  await page.locator('#telegram-handle').fill('music_client');
+  await page.locator('.consent-option input').check();
+  await page.evaluate(() => {
+    window.open = (url) => { window.__openedTelegramUrl = url; };
+  });
+  await page.locator('.inquiry__submit').click();
+  const telegramDraft = await page.evaluate(() => {
+    const url = document.querySelector('#inquiry-form').dataset.telegramUrl;
+    return {
+      url,
+      openedUrl: window.__openedTelegramUrl,
+      text: new URL(url).searchParams.get('text'),
+    };
+  });
+  assert.equal(telegramDraft.url, telegramDraft.openedUrl, `${viewport.name}: Telegram URL opens`);
+  assert.match(telegramDraft.url, /^https:\/\/t\.me\/aotrom0\?text=/);
+  assert.match(telegramDraft.text, /песня под ключ/);
+  assert.match(telegramDraft.text, /сведение вокала/);
+  assert.match(telegramDraft.text, /@music_client/);
+  assert.match(telegramDraft.text, /aotrom\.art\/consent\//);
+  await page.locator('#inquiry').screenshot({ path: `${outputDir}/inquiry-${viewport.name}.png` });
+
   await page.locator('#video').scrollIntoViewIfNeeded();
   await page.locator('#video').screenshot({ path: `${outputDir}/video-${viewport.name}.png` });
   await page.locator('.video-feature__poster').click();
@@ -106,6 +138,35 @@ for (const viewport of [
   assert.ok(await page.getByText('Городок').isVisible(), `${viewport.name}: ALTRO CORO track is renamed`);
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${viewport.name}: ALTRO CORO page overflows horizontally`);
   await page.screenshot({ path: `${outputDir}/altro-coro-${viewport.name}.png`, fullPage: true });
+
+  await gotoWithRetry(page, `${baseUrl}/viktoriya-solomakhina/`, { waitUntil: 'networkidle' });
+  assert.ok(await page.getByText('Городок', { exact: true }).isVisible(), `${viewport.name}: Victoria track is renamed`);
+  assert.equal(await page.getByText('Мой городок', { exact: true }).count(), 0, `${viewport.name}: old Victoria title is absent`);
+
+  await gotoWithRetry(page, `${baseUrl}/other-projects/`, { waitUntil: 'networkidle' });
+  const blackRaven = page.locator('.work-page__links li').filter({ hasText: 'Чёрный ворон' });
+  assert.equal(await blackRaven.count(), 1, `${viewport.name}: Black Raven entry exists`);
+  assert.match(await blackRaven.locator('a').first().getAttribute('href'), /vkvideo\.ru\/video-41774259_456245737/);
+  assert.match(await blackRaven.locator('.work-page__secondary-link').getAttribute('href'), /music\.yandex\.ru\/album\/32393365/);
+  await blackRaven.screenshot({ path: `${outputDir}/black-raven-${viewport.name}.png` });
+
+  await gotoWithRetry(page, `${baseUrl}/golos/`, { waitUntil: 'networkidle' });
+  for (const title of [
+    '«You Raise Me Up» — Фахриддин Хакимов и Софья Льорет',
+    '«Ах ты, степь широкая» — Евгений Курчич, Александр Власенков',
+    'Алина Калашникова — Больно',
+  ]) {
+    assert.ok(await page.getByText(title, { exact: true }).isVisible(), `${viewport.name}: Voice title ${title}`);
+  }
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${viewport.name}: Voice page overflows horizontally`);
+  await page.screenshot({ path: `${outputDir}/golos-${viewport.name}.png`, fullPage: true });
+
+  for (const legalPath of ['privacy', 'consent']) {
+    await gotoWithRetry(page, `${baseUrl}/${legalPath}/`, { waitUntil: 'networkidle' });
+    assert.ok(await page.locator('.legal-page h1').isVisible(), `${viewport.name}: ${legalPath} heading`);
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${viewport.name}: ${legalPath} overflows horizontally`);
+    await page.screenshot({ path: `${outputDir}/${legalPath}-${viewport.name}.png`, fullPage: true });
+  }
 
   assert.deepEqual(consoleErrors, [], `${viewport.name}: browser console errors`);
   await context.close();
