@@ -9,7 +9,7 @@ const renderEntry = ({ number, title, type, href }) => `
     <span class="artist-row__number">${number}</span>
     <h3 class="artist-row__title">${title}</h3>
     <span class="artist-row__type">${type}</span>
-    <span class="artist-row__action">войти <span aria-hidden="true">↗</span></span>
+    <span class="artist-row__action">войти <span class="external-icon" aria-hidden="true"></span></span>
   </a>
 `;
 
@@ -21,3 +21,12 @@ releaseList.innerHTML = `
   <div class="artist-group-label"><span>ТВ‑проекты</span></div>
   ${tvEntries.map(renderEntry).join('')}
 `;
+
+const videoPoster = document.querySelector('.video-feature__poster');
+
+videoPoster?.addEventListener('click', () => {
+  const videoFrame = videoPoster.parentElement.querySelector('iframe[data-src]');
+  videoFrame.src = videoFrame.dataset.src;
+  videoFrame.hidden = false;
+  videoPoster.remove();
+});

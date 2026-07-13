@@ -3,7 +3,7 @@ export const entries = [
   { key: 'alya', number: '02', title: 'ALYA', type: 'артист', category: 'music', href: 'alya/', image: 'assets/characters/alya.jpg', monochrome: true },
   { key: 'viktoriya-solomakhina', number: '03', title: 'Виктория Соломахина', type: 'артист', category: 'music', href: 'viktoriya-solomakhina/', image: 'assets/characters/viktoriya-solomakhina.jpg', monochrome: true },
   { key: 'nablyudateli', number: '04', title: 'Наблюдатели', type: 'артист', category: 'music', href: 'nablyudateli/', image: 'assets/characters/nablyudateli.jpg', monochrome: true },
-  { key: 'aotrom', number: '05', title: 'aotrom', type: 'артист', category: 'music', href: 'aotrom/', image: null, monochrome: false },
+  { key: 'aotrom', number: '05', title: 'aotrom', type: 'артист', category: 'music', href: 'aotrom/', image: 'assets/characters/aotrom.jpg', monochrome: true },
   { key: 'laren', number: '06', title: 'LAREN', type: 'артист', category: 'music', href: 'laren/', image: null, monochrome: false },
   { key: 'vladimir-shirokov', number: '07', title: 'Владимир Широков', type: 'артист', category: 'music', href: 'vladimir-shirokov/', image: null, monochrome: false },
   { key: 'altro-coro', number: '08', title: 'ALTRO CORO', type: 'артист', category: 'music', href: 'altro-coro/', image: null, monochrome: false },
@@ -12,7 +12,7 @@ export const entries = [
   { key: 'bravo-bis', number: '11', title: 'Браво Бис', type: 'проект', category: 'tv', href: 'bravo-bis/', image: 'assets/projects/bravo-bis.png', monochrome: false },
 ];
 
-const link = (title, url) => ({ title, url });
+const link = (title, url, meta = {}) => ({ title, url, ...meta });
 
 export const portfolioGroups = [
   {
@@ -29,7 +29,11 @@ export const portfolioGroups = [
   {
     key: 'kauzatsiya', title: 'каузация', kind: 'музыка',
     links: [
-      link('От меня до тебя', 'https://aliy-mayak.band.link/otdt'),
+      link('От меня до тебя', 'https://aliy-mayak.band.link/otdt', { label: 'album' }),
+      link('Объясни', 'https://aliy-mayak.ffm.to/objyasni'),
+      link('Мне нечего сказать', 'https://band.link/nechegoskazat'),
+      link('Тенью', 'https://band.link/tenju'),
+      link('Останься', 'https://aliy-mayak.bnd.lc/0stansya'),
       link('Научиться', 'https://band.link/nauchitsya'),
       link('Раньше', 'https://band.link/ranorano'),
     ],

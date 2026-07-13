@@ -41,6 +41,18 @@ assert.match(portfolioData, /https:\/\/band\.link\/__polushko/);
 assert.match(portfolioData, /https:\/\/www\.1tv\.ru\/-\/eqgkx/);
 assert.match(portfolioData, /https:\/\/www\.1tv\.ru\/shows\/golos-12\/vypuski\/chetvertfinal-golos-12-vypusk-ot-12-04-2024/);
 assert.match(portfolioData, /https:\/\/vkvideo\.ru\/video-232371204_456239286/);
+for (const [title, url] of [
+  ['Объясни', 'https://aliy-mayak.ffm.to/objyasni'],
+  ['Мне нечего сказать', 'https://band.link/nechegoskazat'],
+  ['Тенью', 'https://band.link/tenju'],
+  ['Останься', 'https://aliy-mayak.bnd.lc/0stansya'],
+]) {
+  assert.match(portfolioData, new RegExp(title));
+  assert.match(portfolioData, new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+}
+assert.ok(portfolioData.indexOf("link('От меня до тебя'") < portfolioData.indexOf("link('Объясни'"));
+assert.match(portfolioData, /link\('От меня до тебя',[\s\S]*?label: 'album'/);
+assert.match(portfolioData, /key: 'aotrom'[\s\S]*?image: 'assets\/characters\/aotrom\.jpg'/);
 assert.doesNotMatch(portfolioData, /релиз \d+|видео \d+/);
 assert.match(portfolioData, /category: 'tv'/);
 assert.match(styles, /filter:\s*grayscale\(1\)/);
@@ -52,4 +64,8 @@ assert.doesNotMatch(styles, /\.person-card:nth-child\(3\) \.polaroid \{ grid-col
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.polaroid figcaption strong \{ font-size: clamp\(16px, 4\.7vw, 21px\); \}/);
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.hero__image \{ object-position: center center; filter: none; \}/);
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.contact__content \{ gap: 24px; \}/);
+assert.match(styles, /\.release-label/);
+assert.match(styles, /\.external-icon/);
+assert.doesNotMatch(workPage, /↗/);
+assert.match(workPage, /release-label/);
 console.log('character page contract passes');

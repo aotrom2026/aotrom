@@ -33,10 +33,13 @@ root.innerHTML = `
         <h2 id="work-page-works-title">${group.kind}</h2>
       </div>
       <ol class="work-page__links">
-        ${group.links.map(({ title, url }, index) => `
+        ${group.links.map(({ title, url, label }, index) => `
           <li>
             <span>${String(index + 1).padStart(2, '0')}</span>
-            <a href="${url}" target="_blank" rel="noreferrer">${title}<em>${action} ↗</em></a>
+            <a href="${url}" target="_blank" rel="noreferrer">
+              <span class="work-page__release-name">${title}${label ? `<span class="release-label">${label}</span>` : ''}</span>
+              <em>${action}<span class="external-icon" aria-hidden="true"></span></em>
+            </a>
           </li>
         `).join('')}
       </ol>
