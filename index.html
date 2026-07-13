@@ -33,18 +33,63 @@
         </div>
       </section>
 
-      <section id="about" class="about section">
-        <p class="section__kicker">01 / кто я</p>
-        <div class="about__copy">
-          <img class="about__logo" src="assets/aotrom-logo.png" alt="aotrom">
-          <p>музыка, которая только ищет свои слова.</p>
+      <section id="about" class="author section" aria-labelledby="author-title">
+        <p class="section__kicker">01 / об авторе</p>
+        <div class="author__hero">
+          <div class="author__headline">
+            <h1 id="author-title">Андрей<br>Кислов</h1>
+            <img class="author__wordmark" src="assets/aotrom-logo.png" alt="aotrom">
+            <p>саунд-продюсер, композитор, аранжировщик · Москва</p>
+          </div>
+          <figure class="author__polaroid">
+            <img src="assets/author/andrey-profile.jpg" alt="Чёрно-белый портрет Андрея Кислова" loading="lazy">
+          </figure>
         </div>
-        <p class="about__note">Здесь скоро появится история автора.</p>
+        <div class="author__lead">
+          <p>Работаю с песней от идеи до финального мастера: композиция, аранжировка, запись, сведение, продакшн-саунд. Шесть лет в профессии. Полный цикл — от демо на голос и гитару до релиза на всех площадках.</p>
+        </div>
+        <div class="author__chapters">
+          <section>
+            <p class="section__kicker">телевидение</p>
+            <p>Аранжировщик четырёх сезонов шоу «Голос» на Первом канале — 11, 12, 13 и «Голос. Уже не дети». Работал с номерами Виктории Соломахиной, Владислава Зотова, Марии Мировой, Елизаветы Качурак, Валентины Яншиной и Давида Саникидзе. Аранжировки для проекта «Браво Бис».</p>
+          </section>
+          <section>
+            <p class="section__kicker">полный цикл</p>
+            <p>Продакшен для Виктории Соломахиной, каузации, ALYA, Владимира Широкова, Наблюдателей, ALTRO CORO, LAREN, DIANA I, keira и Нерабочего Класса. Все работы собраны в карточках артистов и проектов.</p>
+          </section>
+          <section>
+            <p class="section__kicker">aotrom и ремиксы</p>
+            <p>Русскоязычный альт-поп на электронной основе: chill-hop, соул и r&amp;b. Релизы с 2022 года; ремикс на трек DenDerty «Взрослый» вошёл в официальный альбом «РЕМИКСЕД».</p>
+          </section>
+          <section>
+            <p class="section__kicker">другие форматы</p>
+            <p>Long-mix и DJ-сеты: downtempo, ambient. Резидент музыкальной школы Musical Wave. Услуги: аранжировка, саунд-продюсирование, запись, сведение, мастеринг, авторская музыка, ремиксы, фиты и DJ-сеты.</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="editorial section" aria-labelledby="editorial-title">
+        <p class="section__kicker">02 / достижения</p>
+        <details id="editorial" class="editorial__details">
+          <summary id="editorial-title">мои треки в редакторских полосах <span aria-hidden="true">+</span></summary>
+          <div class="editorial__body">
+            <p>VK: «Новые имена», «Стиль на русском», «Русский поп: новинки», «Русский поп: выбор редакции», «Русский альт-поп», «Меланхолия». Яндекс Музыка: «Источник: поп». Также — «100 перспективных в 2024» и «Плейлист Моспродюсер | Музыка в парках».</p>
+            <a class="editorial__press" href="https://daily.afisha.ru/music/26940-31-glavnyy-novichok-2024-goda-vybor-kuoka-afishi-daily-i-vk-muzyki/" target="_blank" rel="noreferrer">Afisha Daily — 31 главный новичок 2024 года <span aria-hidden="true">↗</span></a>
+            <div class="editorial__grid">
+              <img class="editorial__image" src="assets/editorial/playlist-01.jpg" alt="Плейлист Новые песни под гитару с каузацией и aotrom" loading="lazy">
+              <img class="editorial__image" src="assets/editorial/playlist-02.jpg" alt="Плейлист Нэйм поп с ALYA и aotrom" loading="lazy">
+              <img class="editorial__image" src="assets/editorial/playlist-03.jpg" alt="Плейлист Новые имена VK Музыки" loading="lazy">
+              <img class="editorial__image" src="assets/editorial/playlist-04.jpg" alt="100 перспективных в 2024" loading="lazy">
+              <img class="editorial__image" src="assets/editorial/playlist-05.jpg" alt="Плейлист Моспродюсер Музыка в парках" loading="lazy">
+              <img class="editorial__image" src="assets/editorial/playlist-06.jpg" alt="Плейлист Новые ремиксы" loading="lazy">
+            </div>
+          </div>
+        </details>
       </section>
 
       <section id="releases" class="releases section" aria-labelledby="releases-title">
         <div class="section__heading">
-          <p class="section__kicker">02 / работы</p>
+          <p class="section__kicker">03 / работы</p>
           <h2 id="releases-title">артисты<br>и проекты</h2>
         </div>
         <div id="release-list" class="release-list" aria-live="polite"></div>
@@ -60,10 +105,14 @@
       </section>
 
       <section id="contact" class="contact section">
-        <p class="section__kicker">03 / связь</p>
+        <p class="section__kicker">04 / связь</p>
         <div class="contact__content">
           <h2>будь на связи</h2>
-          <p>ссылки на музыку и соцсети появятся здесь.</p>
+          <div class="contact__links">
+            <a href="https://instagram.com/aotr0m" target="_blank" rel="noreferrer">Instagram — @aotr0m <span aria-hidden="true">↗</span></a>
+            <a href="https://t.me/aotrom0" target="_blank" rel="noreferrer">Telegram — @aotrom0 <span aria-hidden="true">↗</span></a>
+            <a href="tel:+79995415143">+7 999 541-51-43</a>
+          </div>
         </div>
       </section>
     </main>

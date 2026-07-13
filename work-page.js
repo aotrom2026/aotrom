@@ -12,7 +12,7 @@ if (!entry || !group || !root) {
 const action = group.kind === 'видео' ? 'смотреть' : 'слушать';
 const imagePath = entry.image ? `../${entry.image}` : '';
 const media = entry.image ? `
-  <figure class="work-page__media${entry.monochrome ? ' work-page__media--mono' : ''}">
+  <figure class="work-page__polaroid${entry.monochrome ? ' work-page__polaroid--mono' : ''}">
     <img src="${imagePath}" alt="${entry.title}" fetchpriority="high">
   </figure>
 ` : '';

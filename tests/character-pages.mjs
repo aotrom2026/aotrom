@@ -31,8 +31,8 @@ for (const [page, key] of [[character, 'kauzatsiya'], [alya, 'alya'], [viktoriya
 assert.doesNotMatch(`${home}${character}${alya}${viktoriya}${nablyudateli}${aotromPage}${laren}${vladimir}${altroCoro}${otherProjects}${golos}${bravoBis}`, /AOTROOM|aotroom/);
 assert.doesNotMatch(`${home}${character}${alya}${viktoriya}${nablyudateli}${aotromPage}${laren}${vladimir}${altroCoro}${otherProjects}${golos}${bravoBis}`, /персонаж/);
 const workPage = await readFile(new URL('../work-page.js', import.meta.url), 'utf8').catch(() => '');
-assert.match(workPage, /work-page__media/);
-assert.match(styles, /\.work-page__media img \{[\s\S]*?object-fit: contain;/);
+assert.match(workPage, /work-page__polaroid/);
+assert.match(styles, /\.work-page__polaroid img \{[\s\S]*?object-fit: contain;/);
 for (const label of ['Виктория Соломахина', 'каузация', 'ALYA', 'aotrom', 'LAREN', 'Владимир Широков', 'Наблюдатели', 'ALTRO CORO', 'Голос', 'Браво Бис', 'Музыка внутри', 'Ты не верь слезам', 'Проснись со мной', 'Мой городок']) {
   assert.match(portfolioData, new RegExp(label));
 }
@@ -40,7 +40,9 @@ assert.match(portfolioData, /https:\/\/band\.link\/__polushko/);
 assert.match(portfolioData, /https:\/\/www\.1tv\.ru\/-\/eqgkx/);
 assert.match(portfolioData, /https:\/\/vkvideo\.ru\/video-232371204_456239286/);
 assert.doesNotMatch(portfolioData, /релиз \d+|видео \d+/);
+assert.match(portfolioData, /category: 'tv'/);
 assert.match(styles, /filter:\s*grayscale\(1\)/);
+assert.match(styles, /\.work-page__polaroid/);
 assert.match(styles, /\.polaroid img \{[\s\S]*?aspect-ratio: 3 \/ 4;[\s\S]*?object-fit: contain;/);
 assert.doesNotMatch(styles, /\.person-card:nth-child\(3\) \.polaroid \{ grid-column:/);
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.polaroid figcaption strong \{ font-size: clamp\(16px, 4\.7vw, 21px\); \}/);
