@@ -5,12 +5,12 @@ const releaseList = document.querySelector('#release-list');
 releaseList.className = 'artist-list';
 
 const renderEntry = ({ number, title, type, href }) => `
-  <article class="artist-row">
+  <a class="artist-row" href="${href}" aria-label="Открыть страницу: ${title}">
     <span class="artist-row__number">${number}</span>
     <h3 class="artist-row__title">${title}</h3>
     <span class="artist-row__type">${type}</span>
-    <a class="artist-row__action" href="${href}" aria-label="войти: ${title}">войти <span aria-hidden="true">↗</span></a>
-  </article>
+    <span class="artist-row__action">войти <span aria-hidden="true">↗</span></span>
+  </a>
 `;
 
 const musicEntries = entries.filter(({ category }) => category === 'music');

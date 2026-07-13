@@ -20,9 +20,10 @@ const portfolioData = await readFile(new URL('../portfolio-data.js', import.meta
 assert.match(home, /id=["']release-list["']/);
 assert.match(home, /<h2 id=["']releases-title["']>артисты<br>и проекты<\/h2>/);
 assert.match(app, /import \{ entries \} from '\.\/portfolio-data\.js';/);
-assert.match(app, /class="artist-row"/);
+assert.match(app, /<a class="artist-row" href="\$\{href\}" aria-label="Открыть страницу: \$\{title\}">/);
+assert.doesNotMatch(app, /<article class="artist-row"/);
 assert.doesNotMatch(app, /class="portfolio-group"/);
-assert.match(app, /aria-label="войти: \$\{title\}"/);
+assert.match(app, /aria-label="Открыть страницу: \$\{title\}"/);
 for (const [page, key] of [[character, 'kauzatsiya'], [alya, 'alya'], [viktoriya, 'viktoriya-solomakhina'], [nablyudateli, 'nablyudateli'], [aotromPage, 'aotrom'], [laren, 'laren'], [vladimir, 'vladimir-shirokov'], [altroCoro, 'altro-coro'], [otherProjects, 'other-projects'], [golos, 'golos'], [bravoBis, 'bravo-bis']]) {
   assert.match(page, new RegExp(`data-portfolio-key="${key}"`));
   assert.match(page, /\.\.\/work-page\.js/);
@@ -43,6 +44,7 @@ assert.doesNotMatch(portfolioData, /релиз \d+|видео \d+/);
 assert.match(portfolioData, /category: 'tv'/);
 assert.match(styles, /filter:\s*grayscale\(1\)/);
 assert.match(styles, /\.work-page__polaroid/);
+assert.match(styles, /\.work-page h1 \{[\s\S]*?word-break: normal;[\s\S]*?overflow-wrap: normal;/);
 assert.match(styles, /\.polaroid img \{[\s\S]*?aspect-ratio: 3 \/ 4;[\s\S]*?object-fit: contain;/);
 assert.doesNotMatch(styles, /\.person-card:nth-child\(3\) \.polaroid \{ grid-column:/);
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.polaroid figcaption strong \{ font-size: clamp\(16px, 4\.7vw, 21px\); \}/);

@@ -24,6 +24,8 @@ assert.doesNotMatch(html, /id=["']portfolio["']/);
 assert.match(html, /id=["']editorial["']/);
 assert.match(html, /class=["'][^"']*\beditorial\b/);
 assert.equal([...html.matchAll(/class=["']editorial__image["']/g)].length, 6);
+assert.match(html, /class=["']editorial__columns["']/);
+assert.ok(html.indexOf('id="releases"') < html.indexOf('id="editorial"'));
 assert.match(html, /instagram\.com\/aotr0m/);
 assert.match(html, /t\.me\/aotrom0/);
 assert.match(html, /tel:\+79995415143/);
