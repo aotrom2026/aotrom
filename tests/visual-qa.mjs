@@ -91,6 +91,22 @@ for (const viewport of [
   assert.ok(await larenImage.evaluate((image) => image.complete && image.naturalWidth > 0), `${viewport.name}: LAREN portrait is loaded`);
   await page.screenshot({ path: `${outputDir}/laren-${viewport.name}.png`, fullPage: true });
 
+  await gotoWithRetry(page, `${baseUrl}/vladimir-shirokov/`, { waitUntil: 'networkidle' });
+  const vladimirImage = page.locator('.work-page__polaroid img');
+  assert.match(await vladimirImage.getAttribute('src'), /assets\/characters\/vladimir-shirokov\.jpg$/);
+  assert.ok(await vladimirImage.evaluate((image) => image.complete && image.naturalWidth > 0), `${viewport.name}: Vladimir portrait is loaded`);
+  assert.match(await vladimirImage.evaluate((image) => getComputedStyle(image).filter), /grayscale/);
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${viewport.name}: Vladimir page overflows horizontally`);
+  await page.screenshot({ path: `${outputDir}/vladimir-${viewport.name}.png`, fullPage: true });
+
+  await gotoWithRetry(page, `${baseUrl}/altro-coro/`, { waitUntil: 'networkidle' });
+  const altroImage = page.locator('.work-page__polaroid img');
+  assert.match(await altroImage.getAttribute('src'), /assets\/characters\/altro-coro\.jpg$/);
+  assert.ok(await altroImage.evaluate((image) => image.complete && image.naturalWidth > 0), `${viewport.name}: ALTRO CORO image is loaded`);
+  assert.ok(await page.getByText('Городок').isVisible(), `${viewport.name}: ALTRO CORO track is renamed`);
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), `${viewport.name}: ALTRO CORO page overflows horizontally`);
+  await page.screenshot({ path: `${outputDir}/altro-coro-${viewport.name}.png`, fullPage: true });
+
   assert.deepEqual(consoleErrors, [], `${viewport.name}: browser console errors`);
   await context.close();
 }
