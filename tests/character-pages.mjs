@@ -34,7 +34,7 @@ assert.doesNotMatch(`${home}${character}${alya}${viktoriya}${nablyudateli}${aotr
 const workPage = await readFile(new URL('../work-page.js', import.meta.url), 'utf8').catch(() => '');
 assert.match(workPage, /work-page__polaroid/);
 assert.match(styles, /\.work-page__polaroid img \{[\s\S]*?object-fit: contain;/);
-for (const label of ['Виктория Соломахина', 'каузация', 'ALYA', 'aotrom', 'LAREN', 'Владимир Широков', 'Наблюдатели', 'ALTRO CORO', 'Голос', 'Браво Бис', 'Музыка внутри', 'Ты не верь слезам', 'Алина — Больно', 'Проснись со мной', 'Мой городок']) {
+for (const label of ['Виктория Соломахина', 'каузация', 'ALYA', 'aotrom', 'LAREN', 'Владимир Широков', 'Наблюдатели', 'ALTRO CORO', 'Голос', 'Браво! Бис!', 'Музыка внутри', 'Ты не верь слезам', 'Алина — Больно', 'Проснись со мной', 'С тобой', 'Пока снег', 'Мой городок']) {
   assert.match(portfolioData, new RegExp(label));
 }
 assert.match(portfolioData, /https:\/\/band\.link\/__polushko/);
@@ -46,6 +46,8 @@ for (const [title, url] of [
   ['Мне нечего сказать', 'https://band.link/nechegoskazat'],
   ['Тенью', 'https://band.link/tenju'],
   ['Останься', 'https://aliy-mayak.bnd.lc/0stansya'],
+  ['Пока снег', 'https://music.yandex.ru/album/39719271/track/146161336?ref_id=F4FE00F1-CD9C-4E0D-8AF1-B524D9156652&utm_medium=copy_link'],
+  ['С тобой', 'https://music.yandex.ru/album/39719271/track/146161341?ref_id=C79E5907-EECB-4A57-A109-E00C8F2421CE&utm_medium=copy_link'],
 ]) {
   assert.match(portfolioData, new RegExp(title));
   assert.match(portfolioData, new RegExp(url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
@@ -53,6 +55,7 @@ for (const [title, url] of [
 assert.ok(portfolioData.indexOf("link('От меня до тебя'") < portfolioData.indexOf("link('Объясни'"));
 assert.match(portfolioData, /link\('От меня до тебя',[\s\S]*?label: 'album'/);
 assert.match(portfolioData, /key: 'aotrom'[\s\S]*?image: 'assets\/characters\/aotrom\.jpg'/);
+assert.match(portfolioData, /key: 'laren'[\s\S]*?image: 'assets\/characters\/laren\.jpg'/);
 assert.doesNotMatch(portfolioData, /релиз \d+|видео \d+/);
 assert.match(portfolioData, /category: 'tv'/);
 assert.match(styles, /filter:\s*grayscale\(1\)/);
@@ -65,7 +68,9 @@ assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.polaroid figcaption s
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.hero__image \{ object-position: center center; filter: none; \}/);
 assert.match(styles, /@media \(max-width: 700px\)[\s\S]*?\.contact__content \{ gap: 24px; \}/);
 assert.match(styles, /\.release-label/);
+assert.match(styles, /\.release-label--album img/);
+assert.match(workPage, /assets\/stamps\/album\.png/);
 assert.match(styles, /\.external-icon/);
-assert.doesNotMatch(workPage, /↗/);
+assert.doesNotMatch(workPage, /[↗←↓]/);
 assert.match(workPage, /release-label/);
 console.log('character page contract passes');

@@ -4,12 +4,12 @@ export const entries = [
   { key: 'viktoriya-solomakhina', number: '03', title: 'Виктория Соломахина', type: 'артист', category: 'music', href: 'viktoriya-solomakhina/', image: 'assets/characters/viktoriya-solomakhina.jpg', monochrome: true },
   { key: 'nablyudateli', number: '04', title: 'Наблюдатели', type: 'артист', category: 'music', href: 'nablyudateli/', image: 'assets/characters/nablyudateli.jpg', monochrome: true },
   { key: 'aotrom', number: '05', title: 'aotrom', type: 'артист', category: 'music', href: 'aotrom/', image: 'assets/characters/aotrom.jpg', monochrome: true },
-  { key: 'laren', number: '06', title: 'LAREN', type: 'артист', category: 'music', href: 'laren/', image: null, monochrome: false },
+  { key: 'laren', number: '06', title: 'LAREN', type: 'артист', category: 'music', href: 'laren/', image: 'assets/characters/laren.jpg', monochrome: false },
   { key: 'vladimir-shirokov', number: '07', title: 'Владимир Широков', type: 'артист', category: 'music', href: 'vladimir-shirokov/', image: null, monochrome: false },
   { key: 'altro-coro', number: '08', title: 'ALTRO CORO', type: 'артист', category: 'music', href: 'altro-coro/', image: null, monochrome: false },
   { key: 'other-projects', number: '09', title: 'Остальные проекты', type: 'проект', category: 'music', href: 'other-projects/', image: null, monochrome: false },
   { key: 'golos', number: '10', title: 'Голос', type: 'проект', category: 'tv', href: 'golos/', image: 'assets/projects/golos.png', monochrome: false },
-  { key: 'bravo-bis', number: '11', title: 'Браво Бис', type: 'проект', category: 'tv', href: 'bravo-bis/', image: 'assets/projects/bravo-bis.png', monochrome: false },
+  { key: 'bravo-bis', number: '11', title: 'Браво! Бис!', type: 'проект', category: 'tv', href: 'bravo-bis/', image: 'assets/projects/bravo-bis.png', monochrome: false },
 ];
 
 const link = (title, url, meta = {}) => ({ title, url, ...meta });
@@ -22,6 +22,7 @@ export const portfolioGroups = [
       link('Русалочка', 'https://bnd.lc/rusalochkaa'),
       link('Унеси', 'https://vikso.band.link/_unesi'),
       link('Проснись со мной', 'https://band.link/prosnissomnoy'),
+      link('С тобой', 'https://music.yandex.ru/album/39719271/track/146161341?ref_id=C79E5907-EECB-4A57-A109-E00C8F2421CE&utm_medium=copy_link'),
       link('Прощай', 'https://band.link/proshay'),
       link('Мой городок', 'https://band.link/moygorodok'),
     ],
@@ -34,6 +35,7 @@ export const portfolioGroups = [
       link('Мне нечего сказать', 'https://band.link/nechegoskazat'),
       link('Тенью', 'https://band.link/tenju'),
       link('Останься', 'https://aliy-mayak.bnd.lc/0stansya'),
+      link('Пока снег', 'https://music.yandex.ru/album/39719271/track/146161336?ref_id=F4FE00F1-CD9C-4E0D-8AF1-B524D9156652&utm_medium=copy_link'),
       link('Научиться', 'https://band.link/nauchitsya'),
       link('Раньше', 'https://band.link/ranorano'),
     ],
@@ -119,7 +121,7 @@ export const portfolioGroups = [
     ],
   },
   {
-    key: 'bravo-bis', title: 'Браво Бис', kind: 'видео',
+    key: 'bravo-bis', title: 'Браво! Бис!', kind: 'видео',
     links: [
       link('Виктория Соломахина — I Will Always Love You', 'https://vkvideo.ru/video-232371204_456239286?pl=-232371204_1&t=19s'),
       link('Виктория Соломахина — Пёрышко', 'https://vkvideo.ru/video-232371204_456239227?pl=-232371204_1&t=29s'),
