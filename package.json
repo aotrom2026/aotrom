@@ -3,7 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/page-contract.mjs && node tests/character-pages.mjs && node tests/inquiry-form.mjs",
+    "test": "node tests/page-contract.mjs && node tests/character-pages.mjs && node tests/inquiry-api.mjs && node tests/inquiry-form.mjs",
+    "test:visual": "node tests/visual-qa.mjs",
     "start": "python3 -m http.server 4173 --directory ."
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
   }
 }

@@ -108,7 +108,7 @@ Expected: exit 0 with no output.
 
 - [ ] **Step 3: Run Playwright visual QA**
 
-Run the local server on port 4173 and execute Playwright at 390×844 and 1440×960. Assert no horizontal overflow, all local images load, video section exists, album is first, and screenshots are saved under `/tmp/aotroom-qa`.
+Run the local server on port 4173 and execute Playwright at 390×844 and 1440×960. Assert no horizontal overflow, all local images load, video section exists, album is first, and screenshots are saved under `/tmp/aotrom-qa`.
 
 - [ ] **Step 4: Inspect screenshots and fix defects**
 

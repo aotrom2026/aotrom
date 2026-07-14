@@ -9,7 +9,7 @@ export const normalizeTelegramHandle = (value = '') => {
   return TELEGRAM_HANDLE_PATTERN.test(username) ? `@${username}` : '';
 };
 
-export const buildTelegramDraft = ({ services = [], telegram = '' } = {}) => {
+export const buildTelegramDraft = ({ services = [], telegram = '', brief = '' } = {}) => {
   if (!services.length) {
     throw new Error('Выберите хотя бы одну услугу.');
   }
@@ -19,11 +19,14 @@ export const buildTelegramDraft = ({ services = [], telegram = '' } = {}) => {
     throw new Error('Укажите корректный ник в Telegram.');
   }
 
+  const normalizedBrief = typeof brief === 'string' ? brief.trim() : '';
+
   return [
     'Здравствуйте! Хочу обсудить проект.',
     '',
     'Услуги:',
     ...services.map((service) => `— ${service}`),
+    ...(normalizedBrief ? ['', 'О проекте:', normalizedBrief] : []),
     '',
     `Мой Telegram: ${handle}`,
     '',
@@ -31,11 +34,28 @@ export const buildTelegramDraft = ({ services = [], telegram = '' } = {}) => {
   ].join('\n');
 };
 
+export const createTelegramFallbackUrl = (payload) => {
+  const draft = buildTelegramDraft(payload);
+  return `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(draft)}`;
+};
+
+export const submitInquiry = async (payload, fetchImpl = fetch) => {
+  const response = await fetchImpl('/api/inquiry', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(result.error || 'Не удалось отправить заявку.');
+  return result;
+};
+
 const form = typeof document === 'undefined' ? null : document.querySelector('#inquiry-form');
 
 if (form) {
   const servicesError = form.querySelector('#services-error');
   const telegramInput = form.elements.telegram;
+  const briefInput = form.elements.brief;
   const telegramError = form.querySelector('#telegram-error');
   const consentInput = form.elements['personal-data-consent'];
   const consentError = form.querySelector('#consent-error');
@@ -47,7 +67,7 @@ if (form) {
     consentError.textContent = '';
   };
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     clearErrors();
 
@@ -78,10 +98,29 @@ if (form) {
     }
 
     telegramInput.value = handle;
-    const draft = buildTelegramDraft({ services, telegram: handle });
-    const telegramUrl = `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(draft)}`;
-    form.dataset.telegramUrl = telegramUrl;
-    status.textContent = 'Telegram откроется с готовым сообщением. Проверьте его и нажмите «Отправить».';
-    window.open(telegramUrl, '_blank', 'noopener,noreferrer');
+    const submitButton = form.querySelector('.inquiry__submit');
+    const payload = {
+      services,
+      telegram: handle,
+      brief: briefInput.value.trim(),
+      consent: consentInput.checked,
+      website: form.elements.website.value,
+    };
+    submitButton.disabled = true;
+    status.textContent = 'Отправляем заявку…';
+
+    try {
+      await submitInquiry(payload);
+      form.reset();
+      telegramInput.value = '';
+      status.textContent = 'Заявка отправлена. Андрей ответит вам в Telegram.';
+    } catch {
+      const telegramUrl = createTelegramFallbackUrl(payload);
+      form.dataset.telegramUrl = telegramUrl;
+      status.textContent = 'Бот пока недоступен. Открылся резервный чат — отправьте подготовленное сообщение.';
+      window.open(telegramUrl, '_blank', 'noopener,noreferrer');
+    } finally {
+      submitButton.disabled = false;
+    }
   });
 }

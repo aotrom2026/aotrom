@@ -27,6 +27,7 @@ const media = entry.image ? `
 root.innerHTML = `
   <section class="work-page section" aria-labelledby="work-page-title">
     <div class="work-page__bar">
+      <a class="work-page__brand" href="../" aria-label="aotrom, на главную"><img src="../assets/aotrom-logo.png" alt="aotrom"></a>
       <a class="work-page__back" href="../" aria-label="Вернуться на главную aotrom"><span class="back-icon" aria-hidden="true"></span> назад</a>
       <span>${entry.number} / ${entry.type}</span>
     </div>

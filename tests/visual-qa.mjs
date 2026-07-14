@@ -3,7 +3,7 @@ import { mkdir } from 'node:fs/promises';
 import { chromium } from 'playwright';
 
 const baseUrl = process.env.BASE_URL || 'http://127.0.0.1:4173';
-const outputDir = '/tmp/aotroom-qa';
+const outputDir = '/tmp/aotrom-qa';
 
 await mkdir(outputDir, { recursive: true });
 
@@ -30,8 +30,17 @@ for (const viewport of [
   const context = await browser.newContext({ viewport });
   const page = await context.newPage();
   const consoleErrors = [];
+  const inquiryRequests = [];
   page.on('console', (message) => {
     if (message.type() === 'error') consoleErrors.push(message.text());
+  });
+  await page.route('**/api/inquiry', async (route) => {
+    inquiryRequests.push(route.request().postDataJSON());
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ ok: true }),
+    });
   });
 
   await gotoWithRetry(page, `${baseUrl}/`, { waitUntil: 'domcontentloaded' });
@@ -58,6 +67,10 @@ for (const viewport of [
   assert.equal(await page.locator('.editorial__image').count(), 10, `${viewport.name}: editorial playlist image count`);
   assert.equal(await page.locator('.gallery__image img').count(), 3, `${viewport.name}: author gallery image count`);
 
+  await page.locator('#process').scrollIntoViewIfNeeded();
+  assert.equal(await page.locator('.process-step').count(), 5, `${viewport.name}: process step count`);
+  await page.locator('#process').screenshot({ path: `${outputDir}/process-${viewport.name}.png` });
+
   await page.locator('#inquiry').scrollIntoViewIfNeeded();
   const inquiryColumns = await page.locator('.inquiry__grid').evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').length);
   assert.equal(inquiryColumns, viewport.name === 'mobile' ? 1 : 2, `${viewport.name}: inquiry column layout`);
@@ -68,25 +81,23 @@ for (const viewport of [
   await page.locator('label.service-option').filter({ hasText: 'песня под ключ' }).click();
   await page.locator('label.service-option').filter({ hasText: 'сведение вокала' }).click();
   await page.locator('#telegram-handle').fill('music_client');
+  await page.locator('#project-brief').fill('Нужна аранжировка и сведение демо.');
   await page.locator('.consent-option input').check();
   await page.evaluate(() => {
     window.open = (url) => { window.__openedTelegramUrl = url; };
   });
   await page.locator('.inquiry__submit').click();
-  const telegramDraft = await page.evaluate(() => {
-    const url = document.querySelector('#inquiry-form').dataset.telegramUrl;
-    return {
-      url,
-      openedUrl: window.__openedTelegramUrl,
-      text: new URL(url).searchParams.get('text'),
-    };
+  await page.getByText('Заявка отправлена. Андрей ответит вам в Telegram.').waitFor({ timeout: 5_000 });
+  assert.equal(await page.evaluate(() => window.__openedTelegramUrl), undefined, `${viewport.name}: Telegram fallback is not opened on API success`);
+  assert.equal(inquiryRequests.length, 1, `${viewport.name}: one inquiry API request`);
+  assert.deepEqual(inquiryRequests[0], {
+    services: ['песня под ключ', 'сведение вокала'],
+    telegram: '@music_client',
+    brief: 'Нужна аранжировка и сведение демо.',
+    consent: true,
+    website: '',
   });
-  assert.equal(telegramDraft.url, telegramDraft.openedUrl, `${viewport.name}: Telegram URL opens`);
-  assert.match(telegramDraft.url, /^https:\/\/t\.me\/aotrom0\?text=/);
-  assert.match(telegramDraft.text, /песня под ключ/);
-  assert.match(telegramDraft.text, /сведение вокала/);
-  assert.match(telegramDraft.text, /@music_client/);
-  assert.match(telegramDraft.text, /aotrom\.art\/consent\//);
+  await page.mouse.move(2, 2);
   await page.locator('#inquiry').screenshot({ path: `${outputDir}/inquiry-${viewport.name}.png` });
 
   await page.locator('#video').scrollIntoViewIfNeeded();
@@ -112,6 +123,7 @@ for (const viewport of [
   await page.screenshot({ path: `${outputDir}/kauzatsiya-${viewport.name}.png`, fullPage: true });
 
   await gotoWithRetry(page, `${baseUrl}/aotrom/`, { waitUntil: 'networkidle' });
+  assert.ok(await page.locator('.work-page__brand img').isVisible(), `${viewport.name}: aotrom logo is visible on project page`);
   const aotromImage = page.locator('.work-page__polaroid img');
   assert.match(await aotromImage.getAttribute('src'), /assets\/characters\/aotrom\.jpg$/);
   assert.ok(await aotromImage.evaluate((image) => image.complete && image.naturalWidth > 0), `${viewport.name}: aotrom portrait is loaded`);
@@ -144,11 +156,24 @@ for (const viewport of [
   assert.equal(await page.getByText('Мой городок', { exact: true }).count(), 0, `${viewport.name}: old Victoria title is absent`);
 
   await gotoWithRetry(page, `${baseUrl}/other-projects/`, { waitUntil: 'networkidle' });
+  assert.ok(await page.getByText('Остальные работы', { exact: true }).isVisible(), `${viewport.name}: other projects title is renamed`);
+  for (const title of ['Алиса Соловьева — Вода', 'Алиса Соловьева — Это искусство', 'Наталья Луч — NO MATTER', 'keira, aotrom — Неважно']) {
+    assert.ok(await page.getByText(title, { exact: true }).isVisible(), `${viewport.name}: other work ${title}`);
+  }
   const blackRaven = page.locator('.work-page__links li').filter({ hasText: 'Чёрный ворон' });
   assert.equal(await blackRaven.count(), 1, `${viewport.name}: Black Raven entry exists`);
   assert.match(await blackRaven.locator('a').first().getAttribute('href'), /vkvideo\.ru\/video-41774259_456245737/);
   assert.match(await blackRaven.locator('.work-page__secondary-link').getAttribute('href'), /music\.yandex\.ru\/album\/32393365/);
   await blackRaven.screenshot({ path: `${outputDir}/black-raven-${viewport.name}.png` });
+
+  await gotoWithRetry(page, `${baseUrl}/alya/`, { waitUntil: 'networkidle' });
+  const alyaNewTrack = page.locator('.work-page__links li').filter({ hasText: 'не пиши' });
+  assert.equal(await alyaNewTrack.count(), 1, `${viewport.name}: ALYA new track exists`);
+  assert.equal(await alyaNewTrack.locator('a').first().getAttribute('href'), 'https://band.link/nYAGx');
+
+  await gotoWithRetry(page, `${baseUrl}/vladimir-shirokov/`, { waitUntil: 'networkidle' });
+  const shirokovNewTrack = page.locator('.work-page__links li').filter({ hasText: 'Золото твоих волос' });
+  assert.equal(await shirokovNewTrack.count(), 1, `${viewport.name}: Shirokov new track exists`);
 
   await gotoWithRetry(page, `${baseUrl}/golos/`, { waitUntil: 'networkidle' });
   for (const title of [

@@ -7,7 +7,7 @@ export const entries = [
   { key: 'laren', number: '06', title: 'LAREN', type: 'артист', category: 'music', href: 'laren/', image: 'assets/characters/laren.jpg', monochrome: true },
   { key: 'vladimir-shirokov', number: '07', title: 'Владимир Широков', type: 'артист', category: 'music', href: 'vladimir-shirokov/', image: 'assets/characters/vladimir-shirokov.jpg', monochrome: true },
   { key: 'altro-coro', number: '08', title: 'ALTRO CORO', type: 'артист', category: 'music', href: 'altro-coro/', image: 'assets/characters/altro-coro.jpg', monochrome: false },
-  { key: 'other-projects', number: '09', title: 'Остальные проекты', type: 'проект', category: 'music', href: 'other-projects/', image: null, monochrome: false },
+  { key: 'other-projects', number: '09', title: 'Остальные работы', type: 'проект', category: 'music', href: 'other-projects/', image: null, monochrome: false },
   { key: 'golos', number: '10', title: 'Голос', type: 'проект', category: 'tv', href: 'golos/', image: 'assets/projects/golos.png', monochrome: false },
   { key: 'bravo-bis', number: '11', title: 'Браво! Бис!', type: 'проект', category: 'tv', href: 'bravo-bis/', image: 'assets/projects/bravo-bis.png', monochrome: false },
 ];
@@ -43,6 +43,7 @@ export const portfolioGroups = [
   {
     key: 'alya', title: 'ALYA', kind: 'музыка',
     links: [
+      link('не пиши', 'https://band.link/nYAGx'),
       link('не любить', 'https://band.link/8Kxmc'),
       link('решено', 'https://band.link/Zqv4j'),
       link('не жди', 'https://band.link/Xo9Ts'),
@@ -76,6 +77,7 @@ export const portfolioGroups = [
     links: [
       link('Ты танцуешь одна / Дыхание', 'https://band.link/DYHANIE_ALBUM'),
       link('Ты танцуешь одна', 'https://music.yandex.ru/album/36334657/track/138468675?utm_source=web&utm_medium=copy_link'),
+      link('Золото твоих волос', 'https://music.yandex.ru/album/36334657/track/138468675?ref_id=A290EB95-4C4E-4F34-A053-34B0C3E003B6&utm_medium=copy_link'),
     ],
   },
   {
@@ -93,8 +95,12 @@ export const portfolioGroups = [
     ],
   },
   {
-    key: 'other-projects', title: 'Остальные проекты', kind: 'музыка',
+    key: 'other-projects', title: 'Остальные работы', kind: 'музыка',
     links: [
+      link('Алиса Соловьева — Вода', 'https://music.yandex.ru/album/23775559/track/108038631?ref_id=6C70FDCE-A2CE-4A85-9B1A-AC2F5A4A5687&utm_medium=copy_link'),
+      link('Алиса Соловьева — Это искусство', 'https://music.yandex.ru/album/24641027/track/110730084?ref_id=4F099CC6-97B2-4C8A-9215-377A80BD69F5&utm_medium=copy_link'),
+      link('Наталья Луч — NO MATTER', 'https://music.yandex.ru/album/25973624/track/114098685?ref_id=7E92345E-00BE-4A83-AB0D-7EF83A532317&utm_medium=copy_link'),
+      link('keira, aotrom — Неважно', 'https://music.yandex.ru/album/37865984/track/142046597?ref_id=DC67DD25-60AE-4703-883A-CF7B362045B9&utm_medium=copy_link'),
       link('Музыка внутри', 'https://band.link/XY8Vf'),
       link('Fire', 'https://band.link/keirafire'),
       link('Red', 'https://onerpm.link/902558270024?fbclid=PAAaaL8po36c9IoUv8oKC7uqG4Z_ISgOUNExysskmrLGhZ9Nb-qMdJip3TiKo_aem_AZH4Vq1xjNXrq4dsc3luA3Uz9z7mroiXfwwEeHjqD5q-DMxAB8hdz7voULFoW5mlJv0'),

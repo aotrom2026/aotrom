@@ -8,6 +8,7 @@ const viktoriya = await readFile(new URL('../viktoriya-solomakhina/index.html', 
 const nablyudateli = await readFile(new URL('../nablyudateli/index.html', import.meta.url), 'utf8').catch(() => '');
 const golos = await readFile(new URL('../golos/index.html', import.meta.url), 'utf8').catch(() => '');
 const bravoBis = await readFile(new URL('../bravo-bis/index.html', import.meta.url), 'utf8').catch(() => '');
+const legacyBrand = ['aot', 'room'].join('');
 const aotromPage = await readFile(new URL('../aotrom/index.html', import.meta.url), 'utf8').catch(() => '');
 const laren = await readFile(new URL('../laren/index.html', import.meta.url), 'utf8').catch(() => '');
 const vladimir = await readFile(new URL('../vladimir-shirokov/index.html', import.meta.url), 'utf8').catch(() => '');
@@ -31,22 +32,26 @@ for (const [page, key] of [[character, 'kauzatsiya'], [alya, 'alya'], [viktoriya
   assert.match(page, new RegExp(`rel="canonical" href="https://aotrom\\.art/${key}/"`));
   assert.match(page, /property="og:title"/);
   assert.match(page, new RegExp(`property="og:url" content="https://aotrom\\.art/${key}/"`));
-  assert.match(page, /property="og:image" content="https:\/\/aotrom\.art\/assets\/hero-desktop\.jpg"/);
+  assert.match(page, /property="og:image" content="https:\/\/aotrom\.art\/assets\/(?:social-preview-logo\.jpg|aotrom-logo\.png)"/);
+  assert.match(page, /property="og:image:alt" content="(?:aotrom|Логотип aotrom)"/);
+  assert.match(page, /rel="icon" type="image\/png" href="\.\.\/assets\/aotrom-logo\.png"/);
   assert.match(page, /href="\.\.\/privacy\/"/);
   assert.match(page, /href="\.\.\/consent\/"/);
 }
-assert.doesNotMatch(`${home}${character}${alya}${viktoriya}${nablyudateli}${aotromPage}${laren}${vladimir}${altroCoro}${otherProjects}${golos}${bravoBis}`, /AOTROOM|aotroom/);
+assert.doesNotMatch(`${home}${character}${alya}${viktoriya}${nablyudateli}${aotromPage}${laren}${vladimir}${altroCoro}${otherProjects}${golos}${bravoBis}`, new RegExp(legacyBrand, 'i'));
 assert.doesNotMatch(`${home}${character}${alya}${viktoriya}${nablyudateli}${aotromPage}${laren}${vladimir}${altroCoro}${otherProjects}${golos}${bravoBis}`, /персонаж/);
 const workPage = await readFile(new URL('../work-page.js', import.meta.url), 'utf8').catch(() => '');
 assert.match(workPage, /work-page__polaroid/);
 assert.match(styles, /\.work-page__polaroid img \{[\s\S]*?object-fit: contain;/);
-for (const label of ['Виктория Соломахина', 'каузация', 'ALYA', 'aotrom', 'LAREN', 'Владимир Широков', 'Наблюдатели', 'ALTRO CORO', 'Голос', 'Браво! Бис!', 'Музыка внутри', 'Ты не верь слезам', 'Алина Калашникова — Больно', '«You Raise Me Up» — Фахриддин Хакимов и Софья Льорет', '«Ах ты, степь широкая» — Евгений Курчич, Александр Власенков', 'Проснись со мной', 'С тобой', 'Пока снег', 'Городок', 'Чёрный ворон']) {
+for (const label of ['Виктория Соломахина', 'каузация', 'ALYA', 'aotrom', 'LAREN', 'Владимир Широков', 'Наблюдатели', 'ALTRO CORO', 'Голос', 'Браво! Бис!', 'Музыка внутри', 'Ты не верь слезам', 'Алина Калашникова — Больно', '«You Raise Me Up» — Фахриддин Хакимов и Софья Льорет', '«Ах ты, степь широкая» — Евгений Курчич, Александр Власенков', 'Проснись со мной', 'С тобой', 'Пока снег', 'Городок', 'Чёрный ворон', 'не пиши', 'Золото твоих волос', 'Алиса Соловьева — Вода', 'Алиса Соловьева — Это искусство', 'Наталья Луч — NO MATTER', 'keira, aotrom — Неважно']) {
   assert.match(portfolioData, new RegExp(label));
 }
 assert.match(portfolioData, /https:\/\/band\.link\/__polushko/);
 assert.match(portfolioData, /https:\/\/www\.1tv\.ru\/-\/eqgkx/);
 assert.match(portfolioData, /https:\/\/www\.1tv\.ru\/shows\/golos-12\/vypuski\/chetvertfinal-golos-12-vypusk-ot-12-04-2024/);
 assert.match(portfolioData, /https:\/\/vkvideo\.ru\/video-232371204_456239286/);
+assert.match(portfolioData, /link\('не пиши', 'https:\/\/band\.link\/nYAGx'\)/);
+assert.match(portfolioData, /link\('Золото твоих волос', 'https:\/\/music\.yandex\.ru\/album\/36334657\/track\/138468675\?ref_id=A290EB95-4C4E-4F34-A053-34B0C3E003B6&utm_medium=copy_link'\)/);
 for (const [title, url] of [
   ['Объясни', 'https://aliy-mayak.ffm.to/objyasni'],
   ['Мне нечего сказать', 'https://band.link/nechegoskazat'],
@@ -77,12 +82,15 @@ const viktoriyaGroup = portfolioData.slice(
 assert.match(viktoriyaGroup, /link\('Городок', 'https:\/\/band\.link\/moygorodok'\)/);
 assert.doesNotMatch(viktoriyaGroup, /link\('Мой городок'/);
 const otherProjectsGroup = portfolioData.slice(
-  portfolioData.indexOf("key: 'other-projects', title: 'Остальные проекты'", portfolioData.indexOf('export const portfolioGroups')),
+  portfolioData.indexOf("key: 'other-projects', title: 'Остальные работы'", portfolioData.indexOf('export const portfolioGroups')),
   portfolioData.indexOf("key: 'golos'", portfolioData.indexOf('export const portfolioGroups'))
 );
 assert.match(otherProjectsGroup, /link\('Чёрный ворон', 'https:\/\/vkvideo\.ru\/video-41774259_456245737\?t=2s'/);
 assert.match(otherProjectsGroup, /secondaryTitle: 'слушать'/);
 assert.match(otherProjectsGroup, /secondaryUrl: 'https:\/\/music\.yandex\.ru\/album\/32393365\/track\/128879744/);
+for (const title of ['Алиса Соловьева — Вода', 'Алиса Соловьева — Это искусство', 'Наталья Луч — NO MATTER', 'keira, aotrom — Неважно']) {
+  assert.match(otherProjectsGroup, new RegExp(title));
+}
 const voiceGroup = portfolioData.slice(
   portfolioData.indexOf("key: 'golos', title: 'Голос'", portfolioData.indexOf('export const portfolioGroups')),
   portfolioData.indexOf("key: 'bravo-bis'", portfolioData.indexOf('export const portfolioGroups'))

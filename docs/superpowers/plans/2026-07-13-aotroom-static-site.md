@@ -1,8 +1,8 @@
-# AOTROOM Static Site Implementation Plan
+# aotrom Static Site Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build and visually verify a responsive, single-page AOTROOM artist site that follows the approved o3ero-inspired composition while using only user-provided imagery.
+**Goal:** Build and visually verify a responsive, single-page aotrom artist site that follows the approved o3ero-inspired composition while using only user-provided imagery.
 
 **Architecture:** A dependency-free static page in `index.html` uses CSS media queries to switch hero images and a short JavaScript renderer for release rows. Assets live locally under `assets/`, including a small curated gallery from the authorised Yandex Disk folder. Browser checks run against a local Python HTTP server through Playwright.
 
@@ -52,7 +52,7 @@ Expected: the three files decode as images with `sips -g pixelWidth -g pixelHeig
 
 ```bash
 git add .gitignore assets
-git commit -m "chore: add aotroom site imagery"
+git commit -m "chore: add aotrom site imagery"
 ```
 
 Expected: commit succeeds in a Git worktree; if the folder is not a repository, preserve the files without initializing Git.
@@ -91,10 +91,10 @@ Expected: failure beginning with `ENOENT` for `index.html`.
 ```html
 <!doctype html>
 <html lang="ru">
-  <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="styles.css"><title>AOTROOM</title></head>
+  <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="styles.css"><title>aotrom</title></head>
   <body>
     <main>
-      <section id="hero" class="hero" aria-label="AOTROOM"><picture><source media="(max-width: 700px)" srcset="assets/hero-mobile.jpg"><img src="assets/hero-desktop.jpg" alt="Портрет автора AOTROOM"></picture></section>
+      <section id="hero" class="hero" aria-label="aotrom"><picture><source media="(max-width: 700px)" srcset="assets/hero-mobile.jpg"><img src="assets/hero-desktop.jpg" alt="Портрет автора aotrom"></picture></section>
       <section id="about"></section><section id="releases"></section><section id="contact"></section>
     </main><script type="module" src="app.js"></script>
   </body>
@@ -115,7 +115,7 @@ Expected: `page contract passes`.
 
 ```bash
 git add package.json tests/page-contract.mjs index.html
-git commit -m "test: define aotroom page contract"
+git commit -m "test: define aotrom page contract"
 ```
 
 ### Task 3: Implement the approved page and release renderer
@@ -158,7 +158,7 @@ Expected: `page contract passes`.
 
 ```bash
 git add index.html styles.css app.js
-git commit -m "feat: build aotroom artist landing page"
+git commit -m "feat: build aotrom artist landing page"
 ```
 
 ### Task 4: Run local visual QA in the browser
@@ -188,5 +188,5 @@ Click the `работы` link, verify the URL ends with `#releases`, and inspect
 
 ```bash
 git add index.html styles.css app.js
-git commit -m "fix: refine aotroom responsive layout"
+git commit -m "fix: refine aotrom responsive layout"
 ```
