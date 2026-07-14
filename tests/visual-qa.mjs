@@ -49,7 +49,9 @@ for (const viewport of [
   for (const image of await page.locator('img').all()) {
     await image.scrollIntoViewIfNeeded();
   }
-  await page.waitForTimeout(300);
+  await page.waitForFunction(() => [...document.images]
+    .filter((image) => new URL(image.src).origin === window.location.origin)
+    .every((image) => image.complete), undefined, { timeout: 10_000 });
 
   const homeMetrics = await page.evaluate(() => ({
     bodyText: document.body.innerText,
@@ -72,6 +74,8 @@ for (const viewport of [
   await page.locator('#process').screenshot({ path: `${outputDir}/process-${viewport.name}.png` });
 
   await page.locator('#inquiry').scrollIntoViewIfNeeded();
+  const inquiryHeight = await page.locator('#inquiry').evaluate((element) => element.getBoundingClientRect().height);
+  if (viewport.name === 'mobile') assert.ok(inquiryHeight <= 860, `${viewport.name}: inquiry section is compact enough`);
   const inquiryColumns = await page.locator('.inquiry__grid').evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' ').length);
   assert.equal(inquiryColumns, viewport.name === 'mobile' ? 1 : 2, `${viewport.name}: inquiry column layout`);
   await page.locator('.inquiry__submit').click();

@@ -245,7 +245,7 @@
           <p class="section__kicker">06 / заказать услугу</p>
           <div>
             <h2 id="inquiry-title">заказать<br>услугу</h2>
-            <p>Заполните короткую форму: выберите нужные услуги, оставьте Telegram — и Андрей напишет вам, чтобы обсудить проект.</p>
+            <p>Выберите услуги и оставьте Telegram — Андрей свяжется с вами.</p>
           </div>
         </div>
         <form id="inquiry-form" class="inquiry__form" novalidate>
@@ -282,10 +282,12 @@
 
               <label class="inquiry__field inquiry__field--brief" for="project-brief">
                 <span>03 / о проекте</span>
-                <textarea id="project-brief" name="brief" rows="3" maxlength="1200" placeholder="Что нужно сделать?" aria-describedby="brief-hint"></textarea>
+                <input id="project-brief" name="brief" type="text" maxlength="1200" placeholder="Что нужно сделать?" aria-describedby="brief-hint">
               </label>
               <p id="brief-hint" class="form-hint">Необязательно. Можно в двух словах описать задачу или прислать референс.</p>
+            </div>
 
+            <div class="inquiry__footer">
               <label class="consent-option">
                 <input type="checkbox" name="personal-data-consent" required>
                 <span>Я даю <a href="consent/" target="_blank">согласие на обработку персональных данных</a> и ознакомлен(а) с <a href="privacy/" target="_blank">политикой конфиденциальности</a>.</span>
@@ -293,7 +295,7 @@
               <p id="consent-error" class="form-error" aria-live="polite"></p>
 
               <button class="inquiry__submit" type="submit">отправить заявку <span class="external-icon" aria-hidden="true"></span></button>
-              <p id="inquiry-status" class="inquiry__status" role="status" aria-live="polite">Данные отправляются только для ответа на заявку. Если бот недоступен, откроется резервный чат.</p>
+              <p id="inquiry-status" class="inquiry__status" role="status" aria-live="polite">После отправки Андрей ответит в Telegram.</p>
             </div>
           </div>
         </form>
