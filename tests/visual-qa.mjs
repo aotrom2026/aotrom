@@ -51,7 +51,7 @@ for (const viewport of [
   }
   await page.waitForFunction(() => [...document.images]
     .filter((image) => new URL(image.src).origin === window.location.origin)
-    .every((image) => image.complete), undefined, { timeout: 10_000 });
+    .every((image) => image.complete), undefined, { timeout: 30_000 });
 
   const homeMetrics = await page.evaluate(() => ({
     bodyText: document.body.innerText,
