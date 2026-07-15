@@ -24,7 +24,10 @@ assert.throws(() => buildTelegramDraft({ services: [], telegram: '@music_client'
 assert.throws(() => buildTelegramDraft({ services: ['мастеринг'], telegram: 'bad handle!' }), /Укажите корректный ник/);
 assert.match(buildTelegramDraft({ services: ['мастеринг'], telegram: '@music_client', brief: 'Нужна финальная полировка трека.' }), /О проекте:[\s\S]*финальная полировка/);
 
-assert.match(createTelegramFallbackUrl({ services: ['мастеринг'], telegram: '@music_client' }), /^https:\/\/t\.me\/aotrom0\?text=/);
+assert.equal(
+  createTelegramFallbackUrl({ services: ['мастеринг'], telegram: '@music_client' }),
+  'https://t.me/aotrombot'
+);
 
 const calls = [];
 const result = await submitInquiry({

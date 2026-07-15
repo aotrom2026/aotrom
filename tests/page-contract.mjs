@@ -28,9 +28,12 @@ assert.doesNotMatch(html, new RegExp(`<h1>${legacyBrand}<\\/h1>`, 'i'));
 assert.doesNotMatch(html, /assets\/gallery\/img-0528\.jpg/);
 assert.match(html, />все<\/a>/);
 assert.doesNotMatch(html, />всё<\/a>/);
-assert.match(html, /<title>Андрей Кислов — саунд-продюсер и композитор<\/title>/);
-assert.match(html, /property=["']og:title["'] content=["']Андрей Кислов — саунд-продюсер и композитор["']/);
-assert.match(html, /property=["']og:description["'] content=["']Песня под ключ, аранжировка/);
+assert.match(html, /<title>aotrom — Андрей Кислов<\/title>/);
+assert.match(html, /property=["']og:title["'] content=["']aotrom — Андрей Кислов["']/);
+assert.match(html, /property=["']og:description["'] content=["']Саунд-продюсер и композитор\.["']/);
+assert.match(html, /name=["']description["'] content=["']aotrom — Андрей Кислов\. Саунд-продюсер и композитор\.["']/);
+assert.doesNotMatch(html, /property=["']og:title["'][^>]*AOTROOM/);
+assert.doesNotMatch(html, /property=["']og:description["'][^>]*музыка автора/);
 assert.match(html, /name=["']twitter:card["'] content=["']summary_large_image["']/);
 assert.match(html, /<source media=["']\(max-width: 700px\)["'] srcset=["']assets\/hero-mobile\.jpg["']/);
 assert.doesNotMatch(html, /telegram-peer-photo-size|telegram-cloud-photo-size/);
@@ -55,13 +58,14 @@ assert.match(html, /tel:\+79995415143/);
 assert.match(html, /id=["']inquiry["']/);
 assert.match(html, /id=["']process["']/);
 assert.match(html, /как устроен\s*<br>\s*процесс/);
+assert.match(html, /для песни под ключ/);
 for (const phrase of ['Первые 3 дня — ваши', 'Месяц с того момента', 'до 70% от объёма', '14 дней', 'до 10%']) {
   assert.ok(html.includes(phrase), `missing process phrase: ${phrase}`);
 }
 assert.equal([...html.matchAll(/class=["']process-step["']/g)].length, 5);
 assert.match(html, /id=["']inquiry-form["']/);
 assert.match(html, /name=["']services["']/);
-for (const service of ['песня под ключ', 'аранжировка', 'сведение', 'мастеринг', 'запись вокала', 'сведение вокала', 'тюн вокала', 'сведение подкастов', 'саунд-дизайн (GSN audio)']) {
+for (const service of ['песня под ключ', 'написание текстов', 'аранжировка', 'сведение', 'мастеринг', 'запись вокала', 'сведение вокала', 'тюн вокала', 'сведение подкастов', 'саунд-дизайн (GSN audio)']) {
   assert.ok(html.includes(service), `missing inquiry service: ${service}`);
 }
 assert.match(html, /name=["']telegram["']/);
@@ -100,8 +104,8 @@ assert.match(app, /external-icon/);
 assert.doesNotMatch(app, /[↗←↓]/);
 assert.doesNotMatch(app, /class="portfolio-group"/);
 assert.match(html, /rel=["']canonical["'] href=["']https:\/\/aotrom\.art\/["']/);
-assert.match(html, /property=["']og:image["'] content=["']https:\/\/aotrom\.art\/assets\/social-preview-logo\.jpg["']/);
-assert.match(html, /name=["']twitter:image["'] content=["']https:\/\/aotrom\.art\/assets\/social-preview-logo\.jpg["']/);
+assert.match(html, /property=["']og:image["'] content=["']https:\/\/aotrom\.art\/assets\/social-preview-logo\.jpg\?v=20260715["']/);
+assert.match(html, /name=["']twitter:image["'] content=["']https:\/\/aotrom\.art\/assets\/social-preview-logo\.jpg\?v=20260715["']/);
 assert.match(html, /property=["']og:image:alt["'] content=["']aotrom["']/);
 assert.match(html, /rel=["']icon["'][^>]*assets\/aotrom-logo\.png/);
 assert.match(html, /type=["']application\/ld\+json["']/);

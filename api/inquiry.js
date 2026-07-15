@@ -1,8 +1,10 @@
 const TELEGRAM_HANDLE_PATTERN = /^@[a-zA-Z0-9_]{5,32}$/;
+export const TELEGRAM_BOT_USERNAME = 'aotrombot';
 export const BRIEF_MAX_LENGTH = 1200;
 
 export const ALLOWED_SERVICES = [
   'песня под ключ',
+  'написание текстов',
   'аранжировка',
   'сведение',
   'мастеринг',
@@ -69,6 +71,18 @@ const isSameOrigin = (request) => {
   }
 };
 
+export const verifyTelegramBot = async (token, fetchImpl = fetch) => {
+  try {
+    const telegramResponse = await fetchImpl(`https://api.telegram.org/bot${token}/getMe`);
+    const result = await telegramResponse.json().catch(() => ({}));
+    return telegramResponse.ok
+      && result.ok === true
+      && result.result?.username?.toLowerCase() === TELEGRAM_BOT_USERNAME;
+  } catch {
+    return false;
+  }
+};
+
 export default async function handler(request, response) {
   if (request.method !== 'POST') return response.status(405).json({ error: 'Метод не поддерживается.' });
   if (!isSameOrigin(request)) return response.status(403).json({ error: 'Запрос отклонён.' });
@@ -89,6 +103,10 @@ export default async function handler(request, response) {
   if (!token || !chatId) return response.status(503).json({ error: 'Бот временно недоступен.' });
 
   try {
+    if (!await verifyTelegramBot(token)) {
+      return response.status(503).json({ error: `Бот @${TELEGRAM_BOT_USERNAME} временно недоступен.` });
+    }
+
     const telegramResponse = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -346,6 +346,7 @@ a:focus-visible {
 .process { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
 .process__heading { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; margin-bottom: clamp(70px, 10vw, 150px); }
 .process__heading h2 { margin: 0; font-size: clamp(62px, 9.2vw, 152px); font-weight: 400; line-height: .76; letter-spacing: -.095em; }
+.process__scope { grid-column: 2; margin: 20px 0 0; color: rgba(16, 16, 15, .62); font-size: 13px; line-height: 1; letter-spacing: -.015em; text-transform: uppercase; }
 .process__steps { margin: 0 0 0 33.333%; padding: 0; border-top: 1px solid var(--ink); list-style: none; }
 .process-step { display: grid; grid-template-columns: 52px minmax(180px, .78fr) minmax(280px, 1.22fr) auto; gap: clamp(18px, 3vw, 48px); align-items: start; padding: clamp(22px, 3.2vw, 46px) 0; border-bottom: 1px solid var(--rule); }
 .process-step__number,
@@ -559,6 +560,7 @@ a:focus-visible {
   .contact__details { gap: 24px; }
   .process__heading { grid-template-columns: 1fr; }
   .process__heading h2 { font-size: clamp(56px, 16vw, 78px); }
+  .process__scope { grid-column: 1; margin-top: 16px; }
   .process__steps { margin-left: 0; }
   .process-step { grid-template-columns: 32px minmax(0, 1fr) auto; gap: 12px; }
   .process-step h3 { font-size: clamp(31px, 9vw, 46px); }

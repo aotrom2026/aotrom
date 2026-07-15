@@ -71,6 +71,7 @@ for (const viewport of [
 
   await page.locator('#process').scrollIntoViewIfNeeded();
   assert.equal(await page.locator('.process-step').count(), 5, `${viewport.name}: process step count`);
+  assert.ok(await page.getByText('для песни под ключ', { exact: true }).isVisible(), `${viewport.name}: process scope note`);
   await page.locator('#process').screenshot({ path: `${outputDir}/process-${viewport.name}.png` });
 
   await page.locator('#inquiry').scrollIntoViewIfNeeded();

@@ -1,4 +1,4 @@
-const TELEGRAM_USERNAME = 'aotrom0';
+const TELEGRAM_BOT_USERNAME = 'aotrombot';
 const TELEGRAM_HANDLE_PATTERN = /^[a-zA-Z0-9_]{5,32}$/;
 
 export const normalizeTelegramHandle = (value = '') => {
@@ -35,8 +35,8 @@ export const buildTelegramDraft = ({ services = [], telegram = '', brief = '' } 
 };
 
 export const createTelegramFallbackUrl = (payload) => {
-  const draft = buildTelegramDraft(payload);
-  return `https://t.me/${TELEGRAM_USERNAME}?text=${encodeURIComponent(draft)}`;
+  buildTelegramDraft(payload);
+  return `https://t.me/${TELEGRAM_BOT_USERNAME}`;
 };
 
 export const submitInquiry = async (payload, fetchImpl = fetch) => {
@@ -117,7 +117,7 @@ if (form) {
     } catch {
       const telegramUrl = createTelegramFallbackUrl(payload);
       form.dataset.telegramUrl = telegramUrl;
-      status.textContent = 'Бот пока недоступен. Открылся резервный чат — отправьте подготовленное сообщение.';
+      status.textContent = 'Бот пока недоступен. Откройте @aotrombot и отправьте заявку вручную.';
       window.open(telegramUrl, '_blank', 'noopener,noreferrer');
     } finally {
       submitButton.disabled = false;
